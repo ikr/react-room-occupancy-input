@@ -42,6 +42,7 @@
   "devDependencies": {
     "browserify": "^6.2.0",
     "jsdom": "^1.2.0",
+    "jsdom-test-browser": "^1.0.3",
     "jshint": "^2.5.10",
     "mocha": "^2.0.1",
     "sinon": "^1.11.1",
