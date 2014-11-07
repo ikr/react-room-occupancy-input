@@ -1,0 +1,19 @@
+# Work in progress
+
+Please don't use just yet. But will be done soon, as I'm working on it _right now._
+
+# About
+
+React.js component for specifying a hotel room occupancy: how many adults, how many kids, how old
+kids are. See [the demo.](http://ikr.su/h/react-room-occupancy-input/demo.html)
+
+# Installation
+
+Made for [Browserify.](http://browserify.org/)
+
+    npm install --save react-room-occupancy-input
+    
+# Usage
+    
+See [the code](https://github.com/ikr/react-room-occupancy-input/blob/master/demo.js) of the demo
+mentioned above.
