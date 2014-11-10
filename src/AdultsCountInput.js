@@ -20,7 +20,7 @@
         },
 
         handleSelectionChange: function (event) {
-            this.props.onChange(parseInt(event.target.value));
+            this.props.onChange(parseInt(event.target.value, 10));
         }
     });
 }());
