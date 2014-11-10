@@ -2,6 +2,7 @@ describe('ChildAgeInput', function () {
     'use strict';
 
     var assert = require('assert'),
+        sinon = require('sinon'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
         ChildAgeInput = require('../src/ChildAgeInput'),
@@ -21,12 +22,15 @@ describe('ChildAgeInput', function () {
         afterEach(function () { bro.tearDown(); });
 
         describe('element', function () {
-            var element;
+            var component,
+                element;
 
             beforeEach(function () {
-                element = TestUtils.renderIntoDocument(
+                component = TestUtils.renderIntoDocument(
                     React.createElement(ChildAgeInput, {value: 7})
-                ).getDOMNode();
+                );
+
+                element = component.getDOMNode();
             });
 
             it('is an input tag', function () {
@@ -51,6 +55,69 @@ describe('ChildAgeInput', function () {
 
             it('passes through its value property value to the input', function () {
                 assert.strictEqual(element.getAttribute('value'), '7');
+            });
+
+            it('has null draft in the state', function () {
+                assert.strictEqual(component.state.draft, null);
+            });
+        });
+
+        describe('element value change', function () {
+            var spy,
+                component,
+                element;
+
+            beforeEach(function () {
+                spy = sinon.spy();
+
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildAgeInput, {value: null, onChange: spy})
+                );
+
+                element = component.getDOMNode();
+            });
+
+            it('happens with an initially empty value', function () {
+                assert.strictEqual(bro.$(element).val(), '');
+            });
+
+            describe('in case of a valid new value', function () {
+                beforeEach(function () {
+                    TestUtils.Simulate.change(element, {target: {value: '0'}});
+                });
+
+                it('triggers the onChange', function () {
+                    assert(spy.calledOnce);
+                });
+
+                it('converts the new new value to integer', function () {
+                    assert.strictEqual(spy.args[0][0], 0);
+                });
+            });
+
+            describe('in case of an invalid new value', function () {
+                beforeEach(function () {
+                    TestUtils.Simulate.change(element, {target: {value: 'moo'}});
+                });
+
+                it('doesn\'t trigger an onChange', function () {
+                    assert(!spy.called);
+                });
+
+                it('gets saved in the state as a draft', function () {
+                    assert.strictEqual(component.state.draft, 'moo');
+                });
+
+                it('gets rendered', function () {
+                    assert.strictEqual(bro.$(element).val(), 'moo');
+                });
+            });
+
+            it('nulls the draft when a valid value is entered', function () {
+                TestUtils.Simulate.change(element, {target: {value: 'boo'}});
+                TestUtils.Simulate.change(element, {target: {value: '5'}});
+
+                assert.strictEqual(component.state.draft, null);
             });
         });
     });
