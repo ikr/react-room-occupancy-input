@@ -29,6 +29,10 @@
             });
         },
 
+        isValid: function () {
+            return isValidChildAge(this.inputValueToRender());
+        },
+
         inputValueToRender: function () {
             if (!isEmpty(this.state.draft)) {
                 return this.state.draft;

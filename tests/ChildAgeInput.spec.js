@@ -120,5 +120,30 @@ describe('ChildAgeInput', function () {
                 assert.strictEqual(component.state.draft, null);
             });
         });
+
+        describe('isValid', function () {
+            it('is true in case of a valid prop value and an empty draft', function () {
+                var component = TestUtils.renderIntoDocument(
+                        React.createElement(ChildAgeInput, {value: 6})
+                    );
+
+                assert(component.isValid());
+            });
+
+            it('is false in case of a valid prop value and a non-empty draft', function () {
+                var component = TestUtils.renderIntoDocument(
+                        React.createElement(ChildAgeInput, {value: 6})
+                    );
+
+                TestUtils.Simulate.change(component.getDOMNode(), {target: {value: 'goo'}});
+
+                assert(!component.isValid());
+            });
+
+            it('is false in case of an absent prop value', function () {
+                var component = TestUtils.renderIntoDocument(React.createElement(ChildAgeInput));
+                assert(!component.isValid());
+            });
+        });
     });
 });
