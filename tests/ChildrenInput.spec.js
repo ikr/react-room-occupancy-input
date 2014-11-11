@@ -91,7 +91,7 @@ describe('ChildrenInput', function () {
         describe('rendering according to the draft value', function () {
             var component;
 
-            beforeEach(function (done) {
+            beforeEach(function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {value: []})
                 );
