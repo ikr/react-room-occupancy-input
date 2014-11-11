@@ -7,7 +7,8 @@
 
     module.exports = React.createClass({
         propTypes: {
-            value: React.PropTypes.array.isRequired
+            value: React.PropTypes.array.isRequired,
+            onChange: React.PropTypes.func
         },
 
         render: function () {
@@ -22,6 +23,7 @@
             return React.createElement(ChildrenCountInput, {
                 ref: 'count',
                 value: this.props.value.length,
+                onChange: this.handleCountChange,
                 key: 'count'
             });
         },
@@ -36,6 +38,10 @@
                     key: id
                 });
             });
+        },
+
+        handleCountChange: function (newCount) {
+            this.props.onChange(this.props.value.slice(0, newCount));
         }
     });
 }());
