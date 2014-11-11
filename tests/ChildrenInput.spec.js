@@ -96,7 +96,7 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {value: []})
                 );
 
-                component.setState({draft: [{age: null}, {age: null}]}, done);
+                component.setState({draft: [{age: null}, {age: null}]});
             });
 
             it('overrides the value property for the count', function () {
