@@ -11,6 +11,10 @@
             onChange: React.PropTypes.func
         },
 
+        getInitialState: function () {
+            return {draft: null};
+        },
+
         render: function () {
             return React.DOM.div({className: 'room-occupancy-children'}, this.subElements());
         },
@@ -22,14 +26,14 @@
         countElement: function () {
             return React.createElement(ChildrenCountInput, {
                 ref: 'count',
-                value: this.props.value.length,
+                value: this.childrenValueToRender().length,
                 onChange: this.handleCountChange,
                 key: 'count'
             });
         },
 
         ageElements: function () {
-            return this.props.value.map(function (child, index) {
+            return this.childrenValueToRender().map(function (child, index) {
                 var id = 'age' + index;
 
                 return React.createElement(ChildAgeInput, {
@@ -41,7 +45,28 @@
         },
 
         handleCountChange: function (newCount) {
-            this.props.onChange(this.props.value.slice(0, newCount));
+            if (newCount <= this.props.value.length) {
+                this.setState({draft: null});
+                this.props.onChange(this.props.value.slice(0, newCount));
+            }
+            else {
+                this.setState({draft: this.prepareDraft(newCount)});
+            }
+        },
+
+        prepareDraft: function (newCount) {
+            var draft = this.props.value.slice(),
+                i;
+
+            for (i = 0; i < newCount - this.props.value.length; i = i + 1) {
+                draft.push({age: null});
+            }
+
+            return draft;
+        },
+
+        childrenValueToRender: function () {
+            return this.state.draft ? this.state.draft : this.props.value;
         }
     });
 }());

@@ -54,6 +54,10 @@ describe('ChildrenInput', function () {
                 element = component.getDOMNode();
             });
 
+            it('has null-ed draft in the state', function () {
+                assert.strictEqual(component.state.draft, null);
+            });
+
             it('includes a referenced ChildrenCountInput', function () {
                 assert(
                     TestUtils.isCompositeComponentWithType(component.refs.count, ChildrenCountInput)
@@ -81,6 +85,26 @@ describe('ChildrenInput', function () {
                 it('sets the age #' + index + ' value', function () {
                     assert.strictEqual(component.refs['age' + index].props.value, age);
                 });
+            });
+        });
+
+        describe('rendering according to the draft value', function () {
+            var component;
+
+            beforeEach(function (done) {
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {value: []})
+                );
+
+                component.setState({draft: [{age: null}, {age: null}]}, done);
+            });
+
+            it('overrides the value property for the count', function () {
+                assert.strictEqual(component.refs.count.props.value, 2);
+            });
+
+            it('overrides the value property for the ages', function () {
+                assert.strictEqual(component.refs.age1.props.value, null);
             });
         });
 
@@ -114,7 +138,7 @@ describe('ChildrenInput', function () {
                 );
             });
 
-            describe('when it\'s decreased', function () {
+            describe('when the count is decreased', function () {
                 beforeEach(function () {
                     component.handleCountChange(1);
                 });
@@ -125,6 +149,26 @@ describe('ChildrenInput', function () {
 
                 it('calls onChange with the reduced children array', function () {
                     assert.deepEqual(spy.args[0][0], [{age: 4}]);
+                });
+
+                it.skip('clears the draft', function () {
+                    component.setState({draft: [{age: null}]});
+                    component.handleCountChange(1);
+                    assert.strictEqual(component.state.draft, null);
+                });
+            });
+
+            describe.skip('when the count is increased', function () {
+                beforeEach(function () {
+                    component.handleCountChange(3);
+                });
+
+                it('doesn\'t trigger onChange', function () {
+                    assert(!spy.called);
+                });
+
+                it('stores an invalid value array to the state', function () {
+                    assert.deepEqual(component.state.draft, [{age: 4}, {age: 2}, {age: null}]);
                 });
             });
         });
