@@ -7,7 +7,7 @@
 
     module.exports = React.createClass({
         propTypes: {
-            value: React.PropTypes.array
+            value: React.PropTypes.array.isRequired
         },
 
         render: function () {

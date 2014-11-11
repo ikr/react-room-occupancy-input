@@ -32,7 +32,7 @@ describe('ChildrenInput', function () {
             });
         });
 
-        describe('rendering according to its value', function () {
+        describe('rendering according to its pre-set value', function () {
             var component,
                 element;
 
