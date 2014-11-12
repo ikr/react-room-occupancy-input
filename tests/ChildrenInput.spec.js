@@ -181,6 +181,29 @@ describe('ChildrenInput', function () {
             });
         });
 
+        describe('isValid', function () {
+            var component;
+
+            beforeEach(function () {
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {value: [{age: 0}, {age: 0}]})
+                );
+            });
+
+            it('is valid when all the ages are valid', function () {
+                assert(component.isValid());
+            });
+
+            it('is false when one of the ages is invalid', function () {
+                TestUtils.Simulate.change(
+                    component.refs.age0.getDOMNode(),
+                    {target: {value: 'oops'}}
+                );
+
+                assert(!component.isValid());
+            });
+        });
+
         describe('handleAgeChange', function () {});
     });
 });
