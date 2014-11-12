@@ -10,8 +10,6 @@ describe('ChildrenInput', function () {
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils;
 
-    before(function (done) { bro.jQueryify(done); });
-
     it('declares the value property', function () {
         assert(ChildrenInput.propTypes.value);
     });
@@ -21,6 +19,8 @@ describe('ChildrenInput', function () {
     });
 
     describe('instance', function () {
+        before(function (done) { bro.jQueryify(done); });
+
         describe('HTML', function () {
             var element;
 
