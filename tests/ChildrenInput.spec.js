@@ -10,6 +10,8 @@ describe('ChildrenInput', function () {
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils;
 
+    before(function (done) { bro.jQueryify(done); });
+
     it('declares the value property', function () {
         assert(ChildrenInput.propTypes.value);
     });
@@ -21,8 +23,6 @@ describe('ChildrenInput', function () {
     describe('instance', function () {
         describe('HTML', function () {
             var element;
-
-            before(function (done) { bro.jQueryify(done); });
 
             beforeEach(function () {
                 element = TestUtils.renderIntoDocument(
@@ -180,5 +180,7 @@ describe('ChildrenInput', function () {
                 });
             });
         });
+
+        describe('handleAgeChange', function () {});
     });
 });
