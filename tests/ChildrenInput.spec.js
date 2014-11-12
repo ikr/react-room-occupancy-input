@@ -125,6 +125,8 @@ describe('ChildrenInput', function () {
             it('registers an indexed age change handler', function () {
                 assert(component.refs.age1.props.onChange);
                 component.refs.age1.props.onChange(8);
+
+                assert(component.handleAgeChange.calledOnce);
                 assert.deepEqual(component.handleAgeChange.args[0], [1, 8]);
             });
         });
