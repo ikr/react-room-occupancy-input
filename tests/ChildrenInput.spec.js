@@ -111,7 +111,10 @@ describe('ChildrenInput', function () {
 
             beforeEach(function () {
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: [{age: 3}, {age: 9}]})
+                    React.createElement(ChildrenInput, {
+                        value: [{age: 3}, {age: 9}],
+                        onChange: function () {}
+                    })
                 );
 
                 sinon.spy(component, 'handleAgeChange');
@@ -204,6 +207,61 @@ describe('ChildrenInput', function () {
             });
         });
 
-        describe('handleAgeChange', function () {});
+        describe('handleAgeChange when all ages are present', function () {
+            var component,
+                spy;
+
+            beforeEach(function () {
+                spy = sinon.spy();
+
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {
+                        value: [{age: 6}, {age: 11}],
+                        onChange: spy
+                    })
+                );
+
+                component.handleAgeChange(1, 10);
+            });
+
+            it('triggers onChange', function () {
+                assert(spy.calledOnce);
+            });
+
+            it('triggers onChange with new children array', function () {
+                assert.deepEqual(spy.args[0][0], [{age: 6}, {age: 10}]);
+            });
+        });
+
+        describe('handleAgeChange when some age is absent', function () {
+            var component,
+                spy;
+
+            beforeEach(function () {
+                spy = sinon.spy();
+
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {
+                        value: [{age: null}, {age: null}],
+                        onChange: spy
+                    })
+                );
+
+                component.handleAgeChange(0, 0);
+            });
+
+            it('doesn\'t trigger onChange', function () {
+                assert(!spy.called);
+            });
+
+            it('saves new children array to the state', function () {
+                assert.deepEqual(component.state.draft, [{age: 0}, {age: null}]);
+            });
+
+            it('subsequently nulls the draft when the last age gets entered', function () {
+                component.handleAgeChange(1, 1);
+                assert.deepEqual(component.state.draft, null);
+            });
+        });
     });
 });

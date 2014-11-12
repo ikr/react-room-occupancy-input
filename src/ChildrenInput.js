@@ -3,7 +3,17 @@
 
     var React = require('react'),
         ChildrenCountInput = require('./ChildrenCountInput'),
-        ChildAgeInput = require('./ChildAgeInput');
+        ChildAgeInput = require('./ChildAgeInput'),
+
+        clone = function (x) {
+            return JSON.parse(JSON.stringify(x));
+        },
+
+        areAllAgesPresent = function (childrenValue) {
+            return childrenValue.reduce(function (memo, child) {
+                return memo && (child.age !== null);
+            }, true);
+        };
 
     module.exports = React.createClass({
         propTypes: {
@@ -67,7 +77,18 @@
             }
         },
 
-        handleAgeChange: function () {},
+        handleAgeChange: function (index, newAge) {
+            var newChildrenValue = clone(this.childrenValueToRender());
+            newChildrenValue[index].age = newAge;
+
+            if (areAllAgesPresent(newChildrenValue)) {
+                this.setState({draft: null});
+                this.props.onChange(newChildrenValue);
+            }
+            else {
+                this.setState({draft: newChildrenValue});
+            }
+        },
 
         prepareDraft: function (newCount) {
             var draft = this.props.value.slice(),
