@@ -26,7 +26,7 @@ describe('ChildrenInput', function () {
 
             beforeEach(function () {
                 element = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: []})
+                    React.createElement(ChildrenInput, {value: [], onChange: function () {}})
                 ).getDOMNode();
             });
 
@@ -46,7 +46,10 @@ describe('ChildrenInput', function () {
 
             beforeEach(function () {
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: [{age: 0}, {age: 2}, {age: 12}]})
+                    React.createElement(ChildrenInput, {
+                        value: [{age: 0}, {age: 2}, {age: 12}],
+                        onChange: function () {}
+                    })
                 );
 
                 element = component.getDOMNode();
@@ -91,7 +94,7 @@ describe('ChildrenInput', function () {
 
             beforeEach(function () {
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: []})
+                    React.createElement(ChildrenInput, {value: [], onChange: function () {}})
                 );
 
                 component.setState({draft: [{age: null}, {age: null}]});
@@ -189,7 +192,10 @@ describe('ChildrenInput', function () {
 
             beforeEach(function () {
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: [{age: 0}, {age: 0}]})
+                    React.createElement(ChildrenInput, {
+                        value: [{age: 0}, {age: 0}],
+                        onChange: function () {}
+                    })
                 );
             });
 
