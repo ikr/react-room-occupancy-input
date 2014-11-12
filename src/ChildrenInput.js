@@ -33,12 +33,19 @@
         },
 
         ageElements: function () {
+            var onChangeFactory = function (index) {
+                    return function (newAge) {
+                        this.handleAgeChange(index, newAge);
+                    }.bind(this);
+                }.bind(this);
+
             return this.childrenValueToRender().map(function (child, index) {
                 var id = 'age' + index;
 
                 return React.createElement(ChildAgeInput, {
                     ref: id,
                     value: child.age,
+                    onChange: onChangeFactory(index),
                     key: id
                 });
             });
@@ -53,6 +60,8 @@
                 this.setState({draft: this.prepareDraft(newCount)});
             }
         },
+
+        handleAgeChange: function () {},
 
         prepareDraft: function (newCount) {
             var draft = this.props.value.slice(),

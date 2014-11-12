@@ -111,13 +111,21 @@ describe('ChildrenInput', function () {
 
             beforeEach(function () {
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: []})
+                    React.createElement(ChildrenInput, {value: [{age: 3}, {age: 9}]})
                 );
+
+                sinon.spy(component, 'handleAgeChange');
             });
 
             it('registeres a count change handler', function () {
                 assert(component.refs.count.props.onChange);
                 assert.strictEqual(component.refs.count.props.onChange, component.handleCountChange);
+            });
+
+            it('registers an indexed age change handler', function () {
+                assert(component.refs.age1.props.onChange);
+                component.refs.age1.props.onChange(8);
+                assert.deepEqual(component.handleAgeChange.args[0], [1, 8]);
             });
         });
 
