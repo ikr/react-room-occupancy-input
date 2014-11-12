@@ -32,7 +32,6 @@ describe('ChildrenInput', function () {
 
             it('has DIV as a top level tag', function () {
                 assert.strictEqual(element.tagName, 'DIV');
-
             });
 
             it('has the top level class assigned', function () {
