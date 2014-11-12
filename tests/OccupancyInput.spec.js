@@ -2,6 +2,7 @@ describe('OccupancyInput', function () {
     'use strict';
 
     var assert = require('assert'),
+        sinon = require('sinon'),
         bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
@@ -17,7 +18,7 @@ describe('OccupancyInput', function () {
         assert(OccupancyInput.propTypes.onChange);
     });
 
-    describe('instance', function () {
+    describe('instance structure', function () {
         var component,
             element;
 
@@ -78,6 +79,36 @@ describe('OccupancyInput', function () {
                 component.refs.children.props.onChange,
                 component.handleChildrenChange
             );
+        });
+    });
+
+    describe('instance', function () {
+        var spy,
+            component;
+
+        beforeEach(function () {
+            spy = sinon.spy();
+
+            component = TestUtils.renderIntoDocument(
+                React.createElement(OccupancyInput, {
+                    value: {adults: 2, children: [{age: 1}]},
+                    onChange: spy
+                })
+            );
+        });
+
+        describe('handleAdultsChange', function () {
+            beforeEach(function () {
+                component.handleAdultsChange(1);
+            });
+
+            it('triggers onChange', function () {
+                assert(spy.calledOnce);
+            });
+
+            it('triggers onChange with the new room occupancy value', function () {
+                assert.deepEqual(spy.args[0][0], {adults: 1, children: [{age: 1}]});
+            });
         });
     });
 });

@@ -3,7 +3,11 @@
 
     var React = require('react'),
         AdultsCountInput = require('./AdultsCountInput'),
-        ChildrenInput = require('./ChildrenInput');
+        ChildrenInput = require('./ChildrenInput'),
+
+        clone = function (x) {
+            return JSON.parse(JSON.stringify(x));
+        };
 
     module.exports = React.createClass({
         propTypes: {
@@ -29,7 +33,13 @@
             ]);
         },
 
-        handleAdultsChange: function () {},
+        handleAdultsChange: function (newAdultsCount) {
+            var newRoomOccupancy = clone(this.props.value);
+            newRoomOccupancy.adults = newAdultsCount;
+
+            this.props.onChange(newRoomOccupancy);
+        },
+
         handleChildrenChange: function () {}
     });
 }());
