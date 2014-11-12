@@ -40,6 +40,11 @@
             this.props.onChange(newRoomOccupancy);
         },
 
-        handleChildrenChange: function () {}
+        handleChildrenChange: function (newChildrenArray) {
+            var newRoomOccupancy = clone(this.props.value);
+            newRoomOccupancy.children = newChildrenArray;
+
+            this.props.onChange(newRoomOccupancy);
+        }
     });
 }());

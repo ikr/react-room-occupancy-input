@@ -110,5 +110,19 @@ describe('OccupancyInput', function () {
                 assert.deepEqual(spy.args[0][0], {adults: 1, children: [{age: 1}]});
             });
         });
+
+        describe('handleChildrenChange', function () {
+            beforeEach(function () {
+                component.handleChildrenChange([]);
+            });
+
+            it('triggers onChange', function () {
+                assert(spy.calledOnce);
+            });
+
+            it('triggers onChange with the new room occupancy value', function () {
+                assert.deepEqual(spy.args[0][0], {adults: 2, children: []});
+            });
+        });
     });
 });
