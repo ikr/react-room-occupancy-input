@@ -3,13 +3,12 @@ describe('ChildrenInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
+        bro = require('jsdom-test-browser'),
         ChildrenInput = require('../src/ChildrenInput'),
         ChildrenCountInput = require('../src/ChildrenCountInput'),
         ChildAgeInput = require('../src/ChildAgeInput'),
         React = require('react'),
-        TestUtils = require('react/addons').addons.TestUtils,
-        TestBrowser = require('jsdom-test-browser'),
-        bro = new TestBrowser();
+        TestUtils = require('react/addons').addons.TestUtils;
 
     it('declares the value property', function () {
         assert(ChildrenInput.propTypes.value);
@@ -20,11 +19,10 @@ describe('ChildrenInput', function () {
     });
 
     describe('instance', function () {
-        beforeEach(function (done) { bro.setUp(done); });
-        afterEach(function () { bro.tearDown(); });
-
         describe('HTML', function () {
             var element;
+
+            before(function (done) { bro.jQueryify(done); });
 
             beforeEach(function () {
                 element = TestUtils.renderIntoDocument(
@@ -151,14 +149,14 @@ describe('ChildrenInput', function () {
                     assert.deepEqual(spy.args[0][0], [{age: 4}]);
                 });
 
-                it.skip('clears the draft', function () {
+                it('clears the draft', function () {
                     component.setState({draft: [{age: null}]});
                     component.handleCountChange(1);
                     assert.strictEqual(component.state.draft, null);
                 });
             });
 
-            describe.skip('when the count is increased', function () {
+            describe('when the count is increased', function () {
                 beforeEach(function () {
                     component.handleCountChange(3);
                 });

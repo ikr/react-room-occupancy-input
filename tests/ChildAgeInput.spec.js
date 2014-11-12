@@ -3,11 +3,10 @@ describe('ChildAgeInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
+        bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
-        ChildAgeInput = require('../src/ChildAgeInput'),
-        TestBrowser = require('jsdom-test-browser'),
-        bro = new TestBrowser();
+        ChildAgeInput = require('../src/ChildAgeInput');
 
     it('declares the value property', function () {
         assert(ChildAgeInput.propTypes.value);
@@ -18,9 +17,6 @@ describe('ChildAgeInput', function () {
     });
 
     describe('instance', function () {
-        beforeEach(function (done) { bro.setUp(done); });
-        afterEach(function () { bro.tearDown(); });
-
         describe('element', function () {
             var component,
                 element;
@@ -66,6 +62,8 @@ describe('ChildAgeInput', function () {
             var spy,
                 component,
                 element;
+
+            before(function (done) { bro.jQueryify(done); });
 
             beforeEach(function () {
                 spy = sinon.spy();

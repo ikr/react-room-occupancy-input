@@ -3,11 +3,10 @@ describe('AdultsCountInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
+        bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
-        AdultsCountInput = require('../src/AdultsCountInput'),
-        TestBrowser = require('jsdom-test-browser'),
-        bro = new TestBrowser();
+        AdultsCountInput = require('../src/AdultsCountInput');
 
     ['value', 'onChange'].forEach(function (p) {
         it('declares the ' + p + ' property', function () {
@@ -16,13 +15,10 @@ describe('AdultsCountInput', function () {
     });
 
     describe('instance', function () {
-        this.timeout(4000);
-
-        beforeEach(function (done) { bro.setUp(done); });
-        afterEach(function () { bro.tearDown(); });
-
         describe('element HTML', function () {
             var element;
+
+            before(function (done) { bro.jQueryify(done); });
 
             beforeEach(function () {
                 element = TestUtils.renderIntoDocument(
