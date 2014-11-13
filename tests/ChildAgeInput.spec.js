@@ -8,12 +8,10 @@ describe('ChildAgeInput', function () {
         TestUtils = require('react/addons').addons.TestUtils,
         ChildAgeInput = require('../src/ChildAgeInput');
 
-    it('declares the value property', function () {
-        assert(ChildAgeInput.propTypes.value);
-    });
-
-    it('declares the onChange property', function () {
-        assert(ChildAgeInput.propTypes.onChange);
+    ['value', 'onChange', 'onInvalidity'].forEach(function (name) {
+        it('declares the ' + name + ' property', function () {
+            assert(ChildAgeInput.propTypes[name]);
+        });
     });
 
     describe('instance', function () {
@@ -116,6 +114,11 @@ describe('ChildAgeInput', function () {
                 TestUtils.Simulate.change(element, {target: {value: '5'}});
 
                 assert.strictEqual(component.state.draft, null);
+            });
+        });
+
+        describe('onInvalidity notification', function () {
+            it.skip('is triggered when an invalid value is entered', function () {
             });
         });
 

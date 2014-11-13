@@ -11,7 +11,8 @@
     module.exports = React.createClass({
         propTypes: {
             value: React.PropTypes.number,
-            onChange: React.PropTypes.func
+            onChange: React.PropTypes.func,
+            onInvalidity: React.PropTypes.func
         },
 
         getInitialState: function () {
