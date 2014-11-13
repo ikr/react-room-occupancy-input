@@ -6,17 +6,33 @@
 
         Container = React.createClass({
             getInitialState: function () {
-                return {value: {adults: 2, children: [{age: 5}, {age: 7}]}};
+                return {
+                    value: {
+                        adults: 2,
+                        children: [{age: 5}, {age: 7}]
+                    },
+
+                    valid: true
+                };
             },
 
             render: function () {
-                return React.createElement(RoomOccupancyInput, {
-                    value: this.state.value,
+                return React.DOM.div({}, [
+                    React.createElement(RoomOccupancyInput, {
+                        key: 'k0',
+                        value: this.state.value,
 
-                    onChange: function (roomOccupancy) {
-                        this.setState({value: roomOccupancy});
-                    }.bind(this)
-                });
+                        onChange: function (roomOccupancy) {
+                            this.setState({value: roomOccupancy, valid: true});
+                        }.bind(this),
+
+                        onInvalidity: function () {
+                            this.setState({valid: false});
+                        }.bind(this)
+                    }),
+
+                    React.DOM.div({key: 'k1'}, this.state.valid ? 'Valid' : 'Invalid')
+                ]);
             }
         });
 
