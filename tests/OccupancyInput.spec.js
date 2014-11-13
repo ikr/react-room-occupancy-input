@@ -10,12 +10,10 @@ describe('OccupancyInput', function () {
         AdultsCountInput = require('../src/AdultsCountInput'),
         ChildrenInput = require('../src/ChildrenInput');
 
-    it('declares the value property', function () {
-        assert(OccupancyInput.propTypes.value);
-    });
-
-    it('declares the onChange property', function () {
-        assert(OccupancyInput.propTypes.onChange);
+    ['value', 'onChange', 'onInvalidity'].forEach(function (name) {
+        it('declares the ' + name + ' property', function () {
+            assert(OccupancyInput.propTypes[name]);
+        });
     });
 
     describe('instance structure', function () {
@@ -28,7 +26,8 @@ describe('OccupancyInput', function () {
             component = TestUtils.renderIntoDocument(
                 React.createElement(OccupancyInput, {
                     value: {adults: 1, children: []},
-                    onChange: function () {}
+                    onChange: function () {},
+                    onInvalidity: function () {}
                 })
             );
 
@@ -92,7 +91,8 @@ describe('OccupancyInput', function () {
             component = TestUtils.renderIntoDocument(
                 React.createElement(OccupancyInput, {
                     value: {adults: 2, children: [{age: 1}]},
-                    onChange: spy
+                    onChange: spy,
+                    onInvalidity: function () {}
                 })
             );
         });
@@ -123,6 +123,23 @@ describe('OccupancyInput', function () {
             it('triggers onChange with the new room occupancy value', function () {
                 assert.deepEqual(spy.args[0][0], {adults: 2, children: []});
             });
+        });
+    });
+
+    describe('instance onInvalidity notification', function () {
+        it('is propagated from the children input', function () {
+            var spy = sinon.spy(),
+
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(OccupancyInput, {
+                        value: {adults: 1, children: []},
+                        onChange: function () {},
+                        onInvalidity: spy
+                    })
+                );
+
+            component.refs.children.props.onInvalidity();
+            assert(spy.calledOnce);
         });
     });
 });

@@ -12,7 +12,8 @@
     module.exports = React.createClass({
         propTypes: {
             value: React.PropTypes.object.isRequired,
-            onChange: React.PropTypes.func.isRequired
+            onChange: React.PropTypes.func.isRequired,
+            onInvalidity: React.PropTypes.func.isRequired
         },
 
         render: function () {
@@ -28,6 +29,7 @@
                     ref: 'children',
                     value: this.props.value.children,
                     onChange: this.handleChildrenChange,
+                    onInvalidity: this.props.onInvalidity,
                     key: 'k1'
                 })
             ]);
