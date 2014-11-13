@@ -33,6 +33,10 @@
             ]);
         },
 
+        isValid: function () {
+            return this.refs.children.isValid();
+        },
+
         handleAdultsChange: function (newAdultsCount) {
             var newRoomOccupancy = clone(this.props.value);
             newRoomOccupancy.adults = newAdultsCount;
