@@ -62,6 +62,7 @@
                     ref: id,
                     value: child.age,
                     onChange: onChangeFactory(index),
+                    onInvalidity: function () {},
                     key: id
                 });
             });

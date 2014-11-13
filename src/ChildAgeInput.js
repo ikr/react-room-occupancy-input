@@ -52,6 +52,10 @@
                 this.props.onChange(parseInt(event.target.value));
             }
             else {
+                if (isValidChildAge(this.inputValueToRender())) {
+                    this.props.onInvalidity();
+                }
+
                 this.setState({draft: event.target.value});
             }
         }

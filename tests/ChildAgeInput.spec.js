@@ -67,7 +67,10 @@ describe('ChildAgeInput', function () {
                 spy = sinon.spy();
 
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildAgeInput, {value: null, onChange: spy})
+                    React.createElement(
+                        ChildAgeInput,
+                        {value: null, onChange: spy, onInvalidity: function () {}}
+                    )
                 );
 
                 element = component.getDOMNode();
@@ -118,7 +121,28 @@ describe('ChildAgeInput', function () {
         });
 
         describe('onInvalidity notification', function () {
-            it.skip('is triggered when an invalid value is entered', function () {
+            it('is triggered when an invalid value is entered', function () {
+                var spy = sinon.spy(),
+
+                    element = TestUtils.renderIntoDocument(
+                        React.createElement(ChildAgeInput, {value: 0, onInvalidity: spy})
+                    ).getDOMNode();
+
+                TestUtils.Simulate.change(element, {target: {value: '999'}});
+                assert(spy.calledOnce);
+            });
+
+            it('isn\'t triggered when a 2nd/3rd invalid value in a row is entered', function () {
+                var spy = sinon.spy(),
+
+                    element = TestUtils.renderIntoDocument(
+                        React.createElement(ChildAgeInput, {value: null, onInvalidity: spy})
+                    ).getDOMNode();
+
+                TestUtils.Simulate.change(element, {target: {value: '888'}});
+                TestUtils.Simulate.change(element, {target: {value: '777'}});
+
+                assert(!spy.called);
             });
         });
 
@@ -133,7 +157,7 @@ describe('ChildAgeInput', function () {
 
             it('is false in case of a valid prop value and a non-empty draft', function () {
                 var component = TestUtils.renderIntoDocument(
-                        React.createElement(ChildAgeInput, {value: 6})
+                        React.createElement(ChildAgeInput, {value: 6, onInvalidity: function () {}})
                     );
 
                 TestUtils.Simulate.change(component.getDOMNode(), {target: {value: 'goo'}});
