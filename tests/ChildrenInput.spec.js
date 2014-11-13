@@ -258,11 +258,6 @@ describe('ChildrenInput', function () {
                 );
             });
 
-            it('is propagated from an age input', function () {
-                component.refs.age0.props.onInvalidity();
-                assert(spy.calledOnce);
-            });
-
             it('is triggered when children count is increased', function () {
                 component.handleCountChange(2);
                 assert(spy.calledOnce);

@@ -11,8 +11,7 @@
     module.exports = React.createClass({
         propTypes: {
             value: React.PropTypes.number,
-            onChange: React.PropTypes.func,
-            onInvalidity: React.PropTypes.func
+            onChange: React.PropTypes.func
         },
 
         getInitialState: function () {
@@ -48,10 +47,6 @@
                 this.props.onChange(parseInt(event.target.value));
             }
             else {
-                if (isValidChildAge(this.inputValueToRender())) {
-                    this.props.onInvalidity();
-                }
-
                 this.setState({draft: event.target.value});
             }
         }

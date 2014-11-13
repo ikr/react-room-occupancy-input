@@ -57,7 +57,6 @@
                     ref: id,
                     value: child.age,
                     onChange: onChangeFactory(index),
-                    onInvalidity: this.props.onInvalidity,
                     key: id
                 });
             }.bind(this));

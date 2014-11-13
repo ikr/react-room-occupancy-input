@@ -8,7 +8,7 @@ describe('ChildAgeInput', function () {
         TestUtils = require('react/addons').addons.TestUtils,
         ChildAgeInput = require('../src/ChildAgeInput');
 
-    ['value', 'onChange', 'onInvalidity'].forEach(function (name) {
+    ['value', 'onChange'].forEach(function (name) {
         it('declares the ' + name + ' property', function () {
             assert(ChildAgeInput.propTypes[name]);
         });
@@ -67,10 +67,7 @@ describe('ChildAgeInput', function () {
                 spy = sinon.spy();
 
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(
-                        ChildAgeInput,
-                        {value: null, onChange: spy, onInvalidity: function () {}}
-                    )
+                    React.createElement(ChildAgeInput, {value: null, onChange: spy})
                 );
 
                 element = component.getDOMNode();
@@ -117,32 +114,6 @@ describe('ChildAgeInput', function () {
                 TestUtils.Simulate.change(element, {target: {value: '5'}});
 
                 assert.strictEqual(component.state.draft, null);
-            });
-        });
-
-        describe('onInvalidity notification', function () {
-            it('is triggered when an invalid value is entered', function () {
-                var spy = sinon.spy(),
-
-                    element = TestUtils.renderIntoDocument(
-                        React.createElement(ChildAgeInput, {value: 0, onInvalidity: spy})
-                    ).getDOMNode();
-
-                TestUtils.Simulate.change(element, {target: {value: '999'}});
-                assert(spy.calledOnce);
-            });
-
-            it('isn\'t triggered when a 2nd/3rd invalid value in a row is entered', function () {
-                var spy = sinon.spy(),
-
-                    element = TestUtils.renderIntoDocument(
-                        React.createElement(ChildAgeInput, {value: null, onInvalidity: spy})
-                    ).getDOMNode();
-
-                TestUtils.Simulate.change(element, {target: {value: '888'}});
-                TestUtils.Simulate.change(element, {target: {value: '777'}});
-
-                assert(!spy.called);
             });
         });
     });
