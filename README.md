@@ -1,9 +1,5 @@
 [![Build Status](https://travis-ci.org/ikr/react-room-occupancy-input.svg?branch=master)](https://travis-ci.org/ikr/react-room-occupancy-input)
 
-# Work in progress
-
-Please don't use just yet. But will be done soon, as I'm working on it _right now._
-
 # About
 
 React.js component for specifying a hotel room occupancy: how many adults, how many kids, how old
