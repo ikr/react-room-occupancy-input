@@ -31,35 +31,49 @@
         },
 
         subElements: function () {
-            return [this.countElement()].concat(this.ageElements());
+            return [this.countElement()].concat([this.agesElement()]);
         },
 
         countElement: function () {
-            return React.createElement(ChildrenCountInput, {
-                ref: 'count',
-                value: this.childrenValueToRender().length,
-                onChange: this.handleCountChange,
-                key: 'count'
-            });
+            return React.DOM.div({className: 'room-occupancy-children-count', key: 'k0'}, [
+                React.DOM.label({key: 'k0'}, 'Children'),
+
+                React.createElement(ChildrenCountInput, {
+                    ref: 'count',
+                    value: this.childrenValueToRender().length,
+                    onChange: this.handleCountChange,
+                    key: 'k1'
+                })
+            ]);
         },
 
-        ageElements: function () {
+        agesElement: function () {
             var onChangeFactory = function (index) {
                     return function (newAge) {
                         this.handleAgeChange(index, newAge);
                     }.bind(this);
-                }.bind(this);
+                }.bind(this),
 
-            return this.childrenValueToRender().map(function (child, index) {
-                var id = 'age' + index;
+                ageElements = this.childrenValueToRender().map(function (child, index) {
+                    var id = 'age' + index;
 
-                return React.createElement(ChildAgeInput, {
-                    ref: id,
-                    value: child.age,
-                    onChange: onChangeFactory(index),
-                    key: id
-                });
-            }.bind(this));
+                    return React.createElement(ChildAgeInput, {
+                        ref: id,
+                        value: child.age,
+                        onChange: onChangeFactory(index),
+                        key: id
+                    });
+                }.bind(this)),
+
+                labelElement = React.DOM.label(
+                    {key: 'label'},
+                    (ageElements.length === 1) ? 'Child age' : 'Children ages'
+                );
+
+            return React.DOM.div(
+                {className: 'room-occupancy-children-ages', key: 'k1'},
+                (ageElements.length > 0) ? [labelElement].concat(ageElements) : []
+            );
         },
 
         handleCountChange: function (newCount) {

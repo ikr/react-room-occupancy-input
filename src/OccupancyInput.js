@@ -18,12 +18,16 @@
 
         render: function () {
             return React.DOM.div({className: 'room-occupancy'}, [
-                React.createElement(AdultsCountInput, {
-                    ref: 'adults',
-                    value: this.props.value.adults,
-                    onChange: this.handleAdultsChange,
-                    key: 'k0'
-                }),
+                React.DOM.div({className: 'room-occupancy-adults-count', key: 'k0'}, [
+                    React.DOM.label({key: 'k0'}, 'Adults'),
+
+                    React.createElement(AdultsCountInput, {
+                        ref: 'adults',
+                        value: this.props.value.adults,
+                        onChange: this.handleAdultsChange,
+                        key: 'k1'
+                    })
+                ]),
 
                 React.createElement(ChildrenInput, {
                     ref: 'children',
