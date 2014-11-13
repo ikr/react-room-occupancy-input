@@ -10,12 +10,10 @@ describe('ChildrenInput', function () {
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils;
 
-    it('declares the value property', function () {
-        assert(ChildrenInput.propTypes.value);
-    });
-
-    it('declares the onChange property', function () {
-        assert(ChildrenInput.propTypes.onChange);
+    ['value', 'onChange', 'onInvalidity'].forEach(function (name) {
+        it('declares the ' + name + ' property', function () {
+            assert(ChildrenInput.propTypes[name]);
+        });
     });
 
     describe('instance', function () {
