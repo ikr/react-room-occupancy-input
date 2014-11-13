@@ -185,33 +185,6 @@ describe('ChildrenInput', function () {
             });
         });
 
-        describe('isValid', function () {
-            var component;
-
-            beforeEach(function () {
-                component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {
-                        value: [{age: 0}, {age: 0}],
-                        onChange: function () {},
-                        onInvalidity: function () {}
-                    })
-                );
-            });
-
-            it('is valid when all the ages are valid', function () {
-                assert(component.isValid());
-            });
-
-            it('is false when one of the ages is invalid', function () {
-                TestUtils.Simulate.change(
-                    component.refs.age0.getDOMNode(),
-                    {target: {value: 'oops'}}
-                );
-
-                assert(!component.isValid());
-            });
-        });
-
         describe('handleAgeChange when all ages are present', function () {
             var component,
                 spy;

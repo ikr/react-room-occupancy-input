@@ -30,12 +30,6 @@
             return React.DOM.div({className: 'room-occupancy-children'}, this.subElements());
         },
 
-        isValid: function () {
-            return this.childrenValueToRender().reduce(function (memo, child, index) {
-                return memo && this.refs['age' + index].isValid();
-            }.bind(this), true);
-        },
-
         subElements: function () {
             return [this.countElement()].concat(this.ageElements());
         },

@@ -124,12 +124,5 @@ describe('OccupancyInput', function () {
                 assert.deepEqual(spy.args[0][0], {adults: 2, children: []});
             });
         });
-
-        describe('isValid', function () {
-            it('passes through the children.isValid() invocation result', function () {
-                component.refs.children.isValid = function () { return 'WAT?'; };
-                assert.strictEqual(component.isValid(), 'WAT?');
-            });
-        });
     });
 });
