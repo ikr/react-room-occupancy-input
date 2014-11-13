@@ -144,7 +144,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: 4}, {age: 2}],
-                        onChange: spy
+                        onChange: spy,
+                        onInvalidity: function () {}
                     })
                 );
             });
@@ -191,7 +192,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: 0}, {age: 0}],
-                        onChange: function () {}
+                        onChange: function () {},
+                        onInvalidity: function () {}
                     })
                 );
             });
@@ -264,6 +266,38 @@ describe('ChildrenInput', function () {
             it('subsequently nulls the draft when the last age gets entered', function () {
                 component.handleAgeChange(1, 1);
                 assert.deepEqual(component.state.draft, null);
+            });
+        });
+
+        describe('onInvalidity notification', function () {
+            var spy,
+                component;
+
+            beforeEach(function () {
+                spy = sinon.spy();
+
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {
+                        value: [{age: 0}],
+                        onChange: function () {},
+                        onInvalidity: spy
+                    })
+                );
+            });
+
+            it('is propagated from an age input', function () {
+                component.refs.age0.props.onInvalidity();
+                assert(spy.calledOnce);
+            });
+
+            it('is triggered when children count is increased', function () {
+                component.handleCountChange(2);
+                assert(spy.calledOnce);
+            });
+
+            it('isn\'t triggered when children count is decreased', function () {
+                component.handleCountChange(0);
+                assert(!spy.called);
             });
         });
     });

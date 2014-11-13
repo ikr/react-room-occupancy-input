@@ -63,10 +63,10 @@
                     ref: id,
                     value: child.age,
                     onChange: onChangeFactory(index),
-                    onInvalidity: function () {},
+                    onInvalidity: this.props.onInvalidity,
                     key: id
                 });
-            });
+            }.bind(this));
         },
 
         handleCountChange: function (newCount) {
@@ -75,6 +75,7 @@
                 this.props.onChange(this.props.value.slice(0, newCount));
             }
             else {
+                this.props.onInvalidity();
                 this.setState({draft: this.prepareDraft(newCount)});
             }
         },
