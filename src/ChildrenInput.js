@@ -96,6 +96,7 @@
                 this.props.onChange(newChildrenValue);
             }
             else {
+                this.props.onInvalidity();
                 this.setState({draft: newChildrenValue});
             }
         },

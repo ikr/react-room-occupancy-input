@@ -221,7 +221,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: null}, {age: null}],
-                        onChange: spy
+                        onChange: spy,
+                        onInvalidity: function () {}
                     })
                 );
 
@@ -266,6 +267,11 @@ describe('ChildrenInput', function () {
             it('isn\'t triggered when children count is decreased', function () {
                 component.handleCountChange(0);
                 assert(!spy.called);
+            });
+
+            it('is triggered when an age gets null-ed', function () {
+                component.handleAgeChange(0, null);
+                assert(spy.calledOnce);
             });
         });
     });
