@@ -7,23 +7,12 @@
 
         clone = function (x) {
             return JSON.parse(JSON.stringify(x));
-        },
-
-        areAllAgesPresent = function (childrenValue) {
-            return childrenValue.reduce(function (memo, child) {
-                return memo && (child.age !== null);
-            }, true);
         };
 
     module.exports = React.createClass({
         propTypes: {
             value: React.PropTypes.array,
-            onChange: React.PropTypes.func,
-            onInvalidity: React.PropTypes.func
-        },
-
-        getInitialState: function () {
-            return {draft: null};
+            onChange: React.PropTypes.func
         },
 
         render: function () {
@@ -40,7 +29,7 @@
 
                 React.createElement(ChildrenCountInput, {
                     ref: 'count',
-                    value: this.childrenValueToRender().length,
+                    value: this.props.value.length,
                     onChange: this.handleCountChange,
                     key: 'k1'
                 })
@@ -54,7 +43,7 @@
                     }.bind(this);
                 }.bind(this),
 
-                ageElements = this.childrenValueToRender().map(function (child, index) {
+                ageElements = this.props.value.map(function (child, index) {
                     var id = 'age' + index;
 
                     return React.createElement(ChildAgeInput, {
@@ -78,27 +67,17 @@
 
         handleCountChange: function (newCount) {
             if (newCount <= this.props.value.length) {
-                this.setState({draft: null});
                 this.props.onChange(this.props.value.slice(0, newCount));
             }
             else {
-                this.props.onInvalidity();
-                this.setState({draft: this.prepareDraft(newCount)});
+                this.props.onChange(this.prepareDraft(newCount));
             }
         },
 
         handleAgeChange: function (index, newAge) {
-            var newChildrenValue = clone(this.childrenValueToRender());
+            var newChildrenValue = clone(this.props.value);
             newChildrenValue[index].age = newAge;
-
-            if (areAllAgesPresent(newChildrenValue)) {
-                this.setState({draft: null});
-                this.props.onChange(newChildrenValue);
-            }
-            else {
-                this.props.onInvalidity();
-                this.setState({draft: newChildrenValue});
-            }
+            this.props.onChange(newChildrenValue);
         },
 
         prepareDraft: function (newCount) {
@@ -110,10 +89,6 @@
             }
 
             return draft;
-        },
-
-        childrenValueToRender: function () {
-            return this.state.draft ? this.state.draft : this.props.value;
         }
     });
 }());

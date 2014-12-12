@@ -10,9 +10,7 @@
                     value: {
                         adults: 2,
                         children: [{age: 5}, {age: 7}]
-                    },
-
-                    valid: true
+                    }
                 };
             },
 
@@ -23,16 +21,18 @@
                         value: this.state.value,
 
                         onChange: function (roomOccupancy) {
-                            this.setState({value: roomOccupancy, valid: true});
-                        }.bind(this),
-
-                        onInvalidity: function () {
-                            this.setState({valid: false});
+                            this.setState({value: roomOccupancy});
                         }.bind(this)
                     }),
 
-                    React.DOM.div({key: 'k1'}, this.state.valid ? 'Valid' : 'Invalid')
+                    React.DOM.div({key: 'k1'}, this.isValid() ? 'Valid' : 'Invalid')
                 ]);
+            },
+
+            isValid: function () {
+                return this.state.value.children.reduce(function (memo, child) {
+                    return (child.age !== null) && memo;
+                }, true);
             }
         });
 

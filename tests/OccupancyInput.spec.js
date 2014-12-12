@@ -10,7 +10,7 @@ describe('OccupancyInput', function () {
         AdultsCountInput = require('../src/AdultsCountInput'),
         ChildrenInput = require('../src/ChildrenInput');
 
-    ['value', 'onChange', 'onInvalidity'].forEach(function (name) {
+    ['value', 'onChange'].forEach(function (name) {
         it('declares the ' + name + ' property', function () {
             assert(OccupancyInput.propTypes[name]);
         });
@@ -26,8 +26,7 @@ describe('OccupancyInput', function () {
             component = TestUtils.renderIntoDocument(
                 React.createElement(OccupancyInput, {
                     value: {adults: 1, children: []},
-                    onChange: function () {},
-                    onInvalidity: function () {}
+                    onChange: function () {}
                 })
             );
 
@@ -91,8 +90,7 @@ describe('OccupancyInput', function () {
             component = TestUtils.renderIntoDocument(
                 React.createElement(OccupancyInput, {
                     value: {adults: 2, children: [{age: 1}]},
-                    onChange: spy,
-                    onInvalidity: function () {}
+                    onChange: spy
                 })
             );
         });
@@ -123,23 +121,6 @@ describe('OccupancyInput', function () {
             it('triggers onChange with the new room occupancy value', function () {
                 assert.deepEqual(spy.args[0][0], {adults: 2, children: []});
             });
-        });
-    });
-
-    describe('instance onInvalidity notification', function () {
-        it('is propagated from the children input', function () {
-            var spy = sinon.spy(),
-
-                component = TestUtils.renderIntoDocument(
-                    React.createElement(OccupancyInput, {
-                        value: {adults: 1, children: []},
-                        onChange: function () {},
-                        onInvalidity: spy
-                    })
-                );
-
-            component.refs.children.props.onInvalidity();
-            assert(spy.calledOnce);
         });
     });
 });

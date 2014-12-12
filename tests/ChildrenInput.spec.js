@@ -10,7 +10,7 @@ describe('ChildrenInput', function () {
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils;
 
-    ['value', 'onChange', 'onInvalidity'].forEach(function (name) {
+    ['value', 'onChange'].forEach(function (name) {
         it('declares the ' + name + ' property', function () {
             assert(ChildrenInput.propTypes[name]);
         });
@@ -52,10 +52,6 @@ describe('ChildrenInput', function () {
                 element = component.getDOMNode();
             });
 
-            it('has null-ed draft in the state', function () {
-                assert.strictEqual(component.state.draft, null);
-            });
-
             it('includes a referenced ChildrenCountInput', function () {
                 assert(
                     TestUtils.isCompositeComponentWithType(component.refs.count, ChildrenCountInput)
@@ -83,26 +79,6 @@ describe('ChildrenInput', function () {
                 it('sets the age #' + index + ' value', function () {
                     assert.strictEqual(component.refs['age' + index].props.value, age);
                 });
-            });
-        });
-
-        describe('rendering according to the draft value', function () {
-            var component;
-
-            beforeEach(function () {
-                component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: [], onChange: function () {}})
-                );
-
-                component.setState({draft: [{age: null}, {age: null}]});
-            });
-
-            it('overrides the value property for the count', function () {
-                assert.strictEqual(component.refs.count.props.value, 2);
-            });
-
-            it('overrides the value property for the ages', function () {
-                assert.strictEqual(component.refs.age1.props.value, null);
             });
         });
 
@@ -144,8 +120,7 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: 4}, {age: 2}],
-                        onChange: spy,
-                        onInvalidity: function () {}
+                        onChange: spy
                     })
                 );
             });
@@ -162,12 +137,6 @@ describe('ChildrenInput', function () {
                 it('calls onChange with the reduced children array', function () {
                     assert.deepEqual(spy.args[0][0], [{age: 4}]);
                 });
-
-                it('clears the draft', function () {
-                    component.setState({draft: [{age: null}]});
-                    component.handleCountChange(1);
-                    assert.strictEqual(component.state.draft, null);
-                });
             });
 
             describe('when the count is increased', function () {
@@ -175,12 +144,12 @@ describe('ChildrenInput', function () {
                     component.handleCountChange(3);
                 });
 
-                it('doesn\'t trigger onChange', function () {
-                    assert(!spy.called);
+                it('triggers onChange once', function () {
+                    assert(spy.calledOnce);
                 });
 
-                it('stores an invalid value array to the state', function () {
-                    assert.deepEqual(component.state.draft, [{age: 4}, {age: 2}, {age: null}]);
+                it('calls onChange with an augmented children array', function () {
+                    assert.deepEqual(spy.args[0][0], [{age: 4}, {age: 2}, {age: null}]);
                 });
             });
         });
@@ -221,57 +190,19 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: null}, {age: null}],
-                        onChange: spy,
-                        onInvalidity: function () {}
+                        onChange: spy
                     })
                 );
 
                 component.handleAgeChange(0, 0);
             });
 
-            it('doesn\'t trigger onChange', function () {
-                assert(!spy.called);
-            });
-
-            it('saves new children array to the state', function () {
-                assert.deepEqual(component.state.draft, [{age: 0}, {age: null}]);
-            });
-
-            it('subsequently nulls the draft when the last age gets entered', function () {
-                component.handleAgeChange(1, 1);
-                assert.deepEqual(component.state.draft, null);
-            });
-        });
-
-        describe('onInvalidity notification', function () {
-            var spy,
-                component;
-
-            beforeEach(function () {
-                spy = sinon.spy();
-
-                component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {
-                        value: [{age: 0}],
-                        onChange: function () {},
-                        onInvalidity: spy
-                    })
-                );
-            });
-
-            it('is triggered when children count is increased', function () {
-                component.handleCountChange(2);
+            it('triggers onChange once', function () {
                 assert(spy.calledOnce);
             });
 
-            it('isn\'t triggered when children count is decreased', function () {
-                component.handleCountChange(0);
-                assert(!spy.called);
-            });
-
-            it('is triggered when an age gets null-ed', function () {
-                component.handleAgeChange(0, null);
-                assert(spy.calledOnce);
+            it('triggers onChange with the new value', function () {
+                assert.deepEqual(spy.args[0][0], [{age: 0}, {age: null}]);
             });
         });
     });
