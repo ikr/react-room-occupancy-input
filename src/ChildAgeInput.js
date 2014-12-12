@@ -48,6 +48,10 @@
             }
             else {
                 this.setState({draft: event.target.value});
+
+                if (null !== this.props.value) {
+                    this.props.onChange(null);
+                }
             }
         }
     });

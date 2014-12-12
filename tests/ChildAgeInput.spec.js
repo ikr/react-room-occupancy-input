@@ -116,5 +116,26 @@ describe('ChildAgeInput', function () {
                 assert.strictEqual(component.state.draft, null);
             });
         });
+
+        describe('valid element value change', function () {
+            var spy,
+                component,
+                element;
+
+            beforeEach(function () {
+                spy = sinon.spy();
+
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildAgeInput, {value: 12, onChange: spy})
+                );
+
+                element = component.getDOMNode();
+            });
+
+            it('triggers onChange(null) if an invalid value is entered', function () {
+                TestUtils.Simulate.change(element, {target: {value: 'koo'}});
+                assert(spy.calledWith(null));
+            });
+        });
     });
 });
