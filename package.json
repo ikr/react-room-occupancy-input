@@ -7,7 +7,7 @@
     "pretest": "jshint tests src index.js demo.js",
     "test": "mocha -b tests/*.spec.js",
     "build": "browserify demo.js | uglifyjs > www/bundle.js",
-    "devbuild": "browserify demo.js > www/bundle.js",
+    "watch": "watchify demo.js -d -o www/bundle.js -v",
     "tdd": "mocha -b -R min -w tests/*.spec.js"
   },
   "repository": {
@@ -41,13 +41,14 @@
   },
   "homepage": "https://github.com/ikr/react-room-occupancy-input",
   "devDependencies": {
-    "browserify": "^6.2.0",
+    "browserify": "^7.0.0",
     "jsdom": "^1.2.0",
     "jsdom-test-browser": "^2.0.0",
     "jshint": "^2.5.10",
     "mocha": "^2.0.1",
     "sinon": "^1.11.1",
-    "uglify-js": "^2.4.15"
+    "uglify-js": "^2.4.15",
+    "watchify": "^2.1.1"
   },
   "dependencies": {
     "react": "^0.12.0"
