@@ -4,12 +4,16 @@
     var React = require('react'),
         AdultsCountInput = require('./AdultsCountInput'),
         ChildrenInput = require('./ChildrenInput'),
+        ReactIntl = require('react-intl'),
+        FormattedMessage = ReactIntl.FormattedMessage,
+        IntlMixin = ReactIntl.IntlMixin,
 
         clone = function (x) {
             return JSON.parse(JSON.stringify(x));
         };
 
     module.exports = React.createClass({
+        mixins: [IntlMixin],
         propTypes: {
             value: React.PropTypes.object.isRequired,
             onChange: React.PropTypes.func.isRequired
@@ -18,7 +22,10 @@
         render: function () {
             return React.DOM.div({className: 'room-occupancy'}, [
                 React.DOM.div({className: 'room-occupancy-adults-count', key: 'k0'}, [
-                    React.DOM.label({key: 'k0'}, 'Adults'),
+                    React.DOM.label(
+                        {key: 'k0'},
+                        React.createElement(FormattedMessage, {message: this.getIntlMessage('adults')})
+                    ),
 
                     React.createElement(AdultsCountInput, {
                         ref: 'adults',
