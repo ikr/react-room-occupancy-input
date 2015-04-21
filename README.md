@@ -15,3 +15,16 @@ Made for [Browserify.](http://browserify.org/)
     
 See [the code](https://github.com/ikr/react-room-occupancy-input/blob/master/demo.js) of the demo
 mentioned above.
+
+## Internationalization
+
+To translate the component, please pass `messages` property to component.
+Where `messages` it's an object with following format:
+
+```js
+{
+    children: 'Children',
+    childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
+    adults: 'Adults'
+}
+```
