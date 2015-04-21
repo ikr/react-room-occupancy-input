@@ -50,7 +50,6 @@
                     value: this.props.value.children,
                     onChange: this.handleChildrenChange,
                     key: 'k1',
-                    locales: this.props.locales,
                     messages: this.props.messages
                 })
             ]);
