@@ -8,6 +8,14 @@
         FormattedMessage = ReactIntl.FormattedMessage,
         IntlMixin = ReactIntl.IntlMixin,
 
+        enMessages = function () {
+            return {
+                children: 'Children',
+                childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
+                adults: 'Adults'
+            };
+        },
+
         clone = function (x) {
             return JSON.parse(JSON.stringify(x));
         };
@@ -20,6 +28,8 @@
         },
 
         render: function () {
+            this.props.messages = this.props.messages ? this.props.messages : enMessages();
+
             return React.DOM.div({className: 'room-occupancy-children'}, this.subElements());
         },
 
