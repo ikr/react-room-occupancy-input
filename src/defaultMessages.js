@@ -3,9 +3,11 @@
 
     module.exports = function () {
         return {
-            children: 'Children',
-            childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
-            adults: 'Adults'
+            'react-room-occupancy-input': {
+                children: 'Children',
+                childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
+                adults: 'Adults'
+            }
         };
     };
 }());

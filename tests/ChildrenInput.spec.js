@@ -215,9 +215,11 @@ describe('ChildrenInput', function () {
                         value: [{age: null}, {age: null}],
                         onChange: sinon.spy(),
                         messages: {
-                            children: 'Детей',
-                            childrenAge: '{children, plural, =1 {Возраст ребёнка} other {Возраст детей}}',
-                            adults: 'Взрослых'
+                            'react-room-occupancy-input': {
+                                children: 'Детей',
+                                childrenAge: '{children, plural, =1 {Возраст ребёнка} other {Возраст детей}}',
+                                adults: 'Взрослых'
+                            }
                         }
                     })
                 ).getDOMNode();

@@ -6,7 +6,7 @@ describe('defaultMessages', function () {
 
     ['adults', 'children', 'childrenAge'].forEach(function (property) {
         it('declares the ' + property + ' property', function () {
-            assert(defaultMessages()[property]);
+            assert(defaultMessages()['react-room-occupancy-input'][property]);
         });
     });
 });
