@@ -41,15 +41,15 @@
   },
   "homepage": "https://github.com/ikr/react-room-occupancy-input",
   "devDependencies": {
-    "browserify": "^7.0.0",
+    "browserify": "^9.0.8",
     "intl": "^0.1.4",
-    "jsdom": "^1.2.0",
-    "jsdom-test-browser": "^2.0.0",
-    "jshint": "^2.5.10",
-    "mocha": "^2.0.1",
-    "sinon": "^1.11.1",
-    "uglify-js": "^2.4.15",
-    "watchify": "^2.1.1"
+    "jsdom": "^5.0.1",
+    "jsdom-test-browser": "^2.1.0",
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.4",
+    "sinon": "^1.14.1",
+    "uglify-js": "^2.4.20",
+    "watchify": "^3.1.2"
   },
   "dependencies": {
     "react": "^0.12.0",
