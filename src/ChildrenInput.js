@@ -4,15 +4,26 @@
     var React = require('react'),
         ChildrenCountInput = require('./ChildrenCountInput'),
         ChildAgeInput = require('./ChildAgeInput'),
+        ReactIntl = require('react-intl'),
+        defaultMessages = require('./defaultMessages'),
+        FormattedMessage = ReactIntl.FormattedMessage,
+        IntlMixin = ReactIntl.IntlMixin,
 
         clone = function (x) {
             return JSON.parse(JSON.stringify(x));
         };
 
     module.exports = React.createClass({
+        mixins: [IntlMixin],
         propTypes: {
             value: React.PropTypes.array,
             onChange: React.PropTypes.func
+        },
+
+        getDefaultProps: function () {
+            return {
+                messages: defaultMessages()
+            };
         },
 
         render: function () {
@@ -25,7 +36,10 @@
 
         countElement: function () {
             return React.DOM.div({className: 'room-occupancy-children-count', key: 'k0'}, [
-                React.DOM.label({key: 'k0'}, 'Children'),
+                React.DOM.label(
+                    {key: 'k0'},
+                    React.createElement(FormattedMessage, {message: this.getIntlMessage('children')})
+                ),
 
                 React.createElement(ChildrenCountInput, {
                     ref: 'count',
@@ -56,7 +70,10 @@
 
                 labelElement = React.DOM.label(
                     {key: 'label'},
-                    (ageElements.length === 1) ? 'Child age' : 'Children ages'
+                    React.createElement(
+                        FormattedMessage,
+                        {message: this.getIntlMessage('childrenAge'), children: ageElements.length}
+                    )
                 );
 
             return React.DOM.div(

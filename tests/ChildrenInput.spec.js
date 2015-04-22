@@ -205,5 +205,27 @@ describe('ChildrenInput', function () {
                 assert.deepEqual(spy.args[0][0], [{age: 0}, {age: null}]);
             });
         });
+
+        describe('translatable with react-intl', function () {
+            var element;
+
+            beforeEach(function () {
+                element = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {
+                        value: [{age: null}, {age: null}],
+                        onChange: sinon.spy(),
+                        messages: {
+                            children: 'Детей',
+                            childrenAge: '{children, plural, =1 {Возраст ребёнка} other {Возраст детей}}',
+                            adults: 'Взрослых'
+                        }
+                    })
+                ).getDOMNode();
+            });
+
+            it('has correct translate for 2 children', function () {
+                assert(bro.$(element).text().match('Возраст детей'));
+            });
+        });
     });
 });
