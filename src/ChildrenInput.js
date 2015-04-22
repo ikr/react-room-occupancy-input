@@ -38,7 +38,9 @@
             return React.DOM.div({className: 'room-occupancy-children-count', key: 'k0'}, [
                 React.DOM.label(
                     {key: 'k0'},
-                    React.createElement(FormattedMessage, {message: this.getIntlMessage('children')})
+                    React.createElement(FormattedMessage, {
+                        message: this.getIntlMessage('react-room-occupancy-input.children')
+                    })
                 ),
 
                 React.createElement(ChildrenCountInput, {
@@ -72,7 +74,10 @@
                     {key: 'label'},
                     React.createElement(
                         FormattedMessage,
-                        {message: this.getIntlMessage('childrenAge'), children: ageElements.length}
+                        {
+                            message: this.getIntlMessage('react-room-occupancy-input.childrenAge'),
+                            children: ageElements.length
+                        }
                     )
                 );
 
