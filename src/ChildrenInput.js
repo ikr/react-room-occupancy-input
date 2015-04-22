@@ -27,8 +27,6 @@
         },
 
         render: function () {
-            this.props.messages = this.props.messages ? this.props.messages : enMessages();
-
             return React.DOM.div({className: 'room-occupancy-children'}, this.subElements());
         },
 

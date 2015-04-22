@@ -7,5 +7,5 @@
             childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
             adults: 'Adults'
         };
-    }
+    };
 }());
