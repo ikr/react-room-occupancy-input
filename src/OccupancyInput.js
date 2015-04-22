@@ -5,16 +5,9 @@
         AdultsCountInput = require('./AdultsCountInput'),
         ChildrenInput = require('./ChildrenInput'),
         ReactIntl = require('react-intl'),
+        defaultMessages = require('./defaultMessages'),
         FormattedMessage = ReactIntl.FormattedMessage,
         IntlMixin = ReactIntl.IntlMixin,
-
-        enMessages = function () {
-            return {
-                children: 'Children',
-                childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
-                adults: 'Adults'
-            };
-        },
 
         clone = function (x) {
             return JSON.parse(JSON.stringify(x));
@@ -27,9 +20,13 @@
             onChange: React.PropTypes.func.isRequired
         },
 
-        render: function () {
-            this.props.messages = this.props.messages ? this.props.messages : enMessages();
+        getDefaultProps: function () {
+            return {
+                messages: defaultMessages()
+            };
+        },
 
+        render: function () {
             return React.DOM.div({className: 'room-occupancy'}, [
                 React.DOM.div({className: 'room-occupancy-adults-count', key: 'k0'}, [
                     React.DOM.label(

@@ -5,16 +5,9 @@
         ChildrenCountInput = require('./ChildrenCountInput'),
         ChildAgeInput = require('./ChildAgeInput'),
         ReactIntl = require('react-intl'),
+        defaultMessages = require('./defaultMessages'),
         FormattedMessage = ReactIntl.FormattedMessage,
         IntlMixin = ReactIntl.IntlMixin,
-
-        enMessages = function () {
-            return {
-                children: 'Children',
-                childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
-                adults: 'Adults'
-            };
-        },
 
         clone = function (x) {
             return JSON.parse(JSON.stringify(x));
@@ -25,6 +18,12 @@
         propTypes: {
             value: React.PropTypes.array,
             onChange: React.PropTypes.func
+        },
+
+        getDefaultProps: function () {
+            return {
+                messages: defaultMessages()
+            };
         },
 
         render: function () {
