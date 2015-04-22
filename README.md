@@ -18,8 +18,8 @@ mentioned above.
 
 ## Internationalization
 
-To translate the component, please pass `messages` property.
-Where `messages` it's an object with following format:
+[react-intl](https://github.com/yahoo/react-intl)-based. To translate the component, please pass the
+`messages` property, having the following format:
 
 ```js
 {
@@ -31,7 +31,7 @@ Where `messages` it's an object with following format:
 
 This component depends on global `Intl` object. You can polyfill it with [intl](https://github.com/andyearnshaw/Intl.js) package:
 
-```
+```js
 if (!global.Intl) {
     require('intl');
 }
