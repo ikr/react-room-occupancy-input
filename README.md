@@ -18,7 +18,7 @@ mentioned above.
 
 ## Internationalization
 
-To translate the component, please pass `messages` property to component.
+To translate the component, please pass `messages` property.
 Where `messages` it's an object with following format:
 
 ```js
@@ -26,5 +26,13 @@ Where `messages` it's an object with following format:
     children: 'Children',
     childrenAge: '{children, plural, =1 {Child age} other {Children ages}}',
     adults: 'Adults'
+}
+```
+
+This component depends on global `Intl` object. You can polyfill it with [intl](https://github.com/andyearnshaw/Intl.js) package:
+
+```
+if (!global.Intl) {
+    require('intl');
 }
 ```
