@@ -11,4 +11,8 @@ describe('Public API', function () {
     it('is simply the OccupancyInput class', function () {
         assert.strictEqual(api, OccupancyInput);
     });
+
+    it('exports default intl messages', function () {
+        assert(typeof api.intlMessages === 'function');
+    });
 });
