@@ -5,7 +5,6 @@
         ChildrenCountInput = require('./ChildrenCountInput'),
         ChildAgeInput = require('./ChildAgeInput'),
         ReactIntl = require('react-intl'),
-        defaultMessages = require('./defaultMessages'),
         FormattedMessage = ReactIntl.FormattedMessage,
         IntlMixin = ReactIntl.IntlMixin,
 
@@ -18,12 +17,6 @@
         propTypes: {
             value: React.PropTypes.array,
             onChange: React.PropTypes.func
-        },
-
-        getDefaultProps: function () {
-            return {
-                messages: defaultMessages()
-            };
         },
 
         render: function () {

@@ -3,8 +3,12 @@
 
     var RoomOccupancyInput = require('./index'),
         React = require('react'),
+        IntlMixin = require('react-intl').IntlMixin,
+        intlMessages = require('./src/intlMessages'),
 
         Container = React.createClass({
+            mixins: [IntlMixin],
+
             getInitialState: function () {
                 return {
                     value: {
@@ -36,5 +40,13 @@
             }
         });
 
-    React.render(React.createElement(Container), global.document.body);
+    React.render(
+        React.createElement(
+            Container,
+            {
+                messages: intlMessages().en
+            }
+        ),
+        global.document.body
+    );
 }());

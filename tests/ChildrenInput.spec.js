@@ -7,6 +7,7 @@ describe('ChildrenInput', function () {
         ChildrenInput = require('../src/ChildrenInput'),
         ChildrenCountInput = require('../src/ChildrenCountInput'),
         ChildAgeInput = require('../src/ChildAgeInput'),
+        intlMessages = require('../src/intlMessages'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils;
 
@@ -24,7 +25,11 @@ describe('ChildrenInput', function () {
 
             beforeEach(function () {
                 element = TestUtils.renderIntoDocument(
-                    React.createElement(ChildrenInput, {value: [], onChange: function () {}})
+                    React.createElement(ChildrenInput, {
+                        value: [],
+                        onChange: function () {},
+                        messages: intlMessages().en
+                    })
                 ).getDOMNode();
             });
 
@@ -45,7 +50,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: 0}, {age: 2}, {age: 12}],
-                        onChange: function () {}
+                        onChange: function () {},
+                        messages: intlMessages().en
                     })
                 );
 
@@ -89,7 +95,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: 3}, {age: 9}],
-                        onChange: function () {}
+                        onChange: function () {},
+                        messages: intlMessages().en
                     })
                 );
 
@@ -120,7 +127,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: 4}, {age: 2}],
-                        onChange: spy
+                        onChange: spy,
+                        messages: intlMessages().en
                     })
                 );
             });
@@ -164,7 +172,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: 6}, {age: 11}],
-                        onChange: spy
+                        onChange: spy,
+                        messages: intlMessages().en
                     })
                 );
 
@@ -190,7 +199,8 @@ describe('ChildrenInput', function () {
                 component = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: null}, {age: null}],
-                        onChange: spy
+                        onChange: spy,
+                        messages: intlMessages().en
                     })
                 );
 

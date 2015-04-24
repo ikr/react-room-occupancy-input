@@ -8,7 +8,8 @@ describe('OccupancyInput', function () {
         TestUtils = require('react/addons').addons.TestUtils,
         OccupancyInput = require('../src/OccupancyInput'),
         AdultsCountInput = require('../src/AdultsCountInput'),
-        ChildrenInput = require('../src/ChildrenInput');
+        ChildrenInput = require('../src/ChildrenInput'),
+        intlMessages = require('../src/intlMessages');
 
     ['value', 'onChange'].forEach(function (name) {
         it('declares the ' + name + ' property', function () {
@@ -26,7 +27,8 @@ describe('OccupancyInput', function () {
             component = TestUtils.renderIntoDocument(
                 React.createElement(OccupancyInput, {
                     value: {adults: 1, children: []},
-                    onChange: function () {}
+                    onChange: function () {},
+                    messages: intlMessages().en
                 })
             );
 
@@ -90,7 +92,8 @@ describe('OccupancyInput', function () {
             component = TestUtils.renderIntoDocument(
                 React.createElement(OccupancyInput, {
                     value: {adults: 2, children: [{age: 1}]},
-                    onChange: spy
+                    onChange: spy,
+                    messages: intlMessages().en
                 })
             );
         });
