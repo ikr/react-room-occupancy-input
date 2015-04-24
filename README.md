@@ -31,7 +31,12 @@ mentioned above.
 }
 ```
 
-This component depends on global `Intl` object. You can polyfill it with [intl](https://github.com/andyearnshaw/Intl.js) package:
+`react-intl` allows using `react-room-occupancy-input` uniformly in bigger applications, and passing
+all the namespaced translations, from the root, down the React components hierarchy, --
+automatically, with the help of `IntlMixin`.
+
+Please note, that `react-intl` depends on global `Intl` object. You can polyfill it with
+[intl](https://github.com/andyearnshaw/Intl.js) package:
 
 ```js
 if (!global.Intl) {
