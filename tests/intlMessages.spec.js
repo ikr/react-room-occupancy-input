@@ -9,7 +9,7 @@ describe('intlMessages', function () {
     });
 
     describe('react-room-occupancy-input namespace', function () {
-        ['en'].forEach(function (locale) {
+        ['en', 'de'].forEach(function (locale) {
             ['adults', 'children', 'childrenAge'].forEach(function (messageName) {
                 it('defines ' + messageName + ' for ' + locale + ' locale', function () {
                     assert(intlMessages()[locale]['react-room-occupancy-input'][messageName]);
@@ -18,4 +18,3 @@ describe('intlMessages', function () {
         });
     });
 });
-
