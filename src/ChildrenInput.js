@@ -105,7 +105,7 @@
 
             if (drafting) {
                 return [React.DOM.div(
-                    {className: 'alert alert-warning', role: 'alert'},
+                    {className: 'alert alert-warning', role: 'alert', key: 'warning'},
                     this.getIntlMessage('react-room-occupancy-input.childAgeWarning')
                 )];
             }
@@ -131,7 +131,7 @@
             newChildrenValue[index].age = newAge;
             this.props.onChange(newChildrenValue);
 
-            newDrafting[index] = !newAge;
+            newDrafting[index] = (newAge === null);
             this.setState({drafting: newDrafting});
         },
 

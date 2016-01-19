@@ -292,6 +292,11 @@ describe('ChildrenInput', function () {
             it('initially causes no age warning', function () {
                 assert(!component.getDOMNode().querySelector('.alert-warning'));
             });
+
+            it('considers 0 a valid age', function () {
+                component.handleAgeChange(0, 0);
+                assert.deepEqual(component.state.drafting, [false, false]);
+            });
         });
     });
 });
