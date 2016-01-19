@@ -47,6 +47,7 @@
                 messages: intlMessages().en
             }
         ),
-        global.document.body
+
+        global.document.getElementById('root')
     );
 }());
