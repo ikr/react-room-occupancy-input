@@ -3,7 +3,7 @@ describe('ChildrenInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        bro = require('jsdom-test-browser'),
+        massert = require('./helpers/massert'),
         ChildrenInput = require('../src/ChildrenInput'),
         ChildrenCountInput = require('../src/ChildrenCountInput'),
         ChildAgeInput = require('../src/ChildAgeInput'),
@@ -22,8 +22,6 @@ describe('ChildrenInput', function () {
     });
 
     describe('instance', function () {
-        before(function (done) { bro.jQueryify(done); });
-
         describe('HTML', function () {
             var element;
 
@@ -42,7 +40,7 @@ describe('ChildrenInput', function () {
             });
 
             it('has the top level class assigned', function () {
-                assert(bro.$(element).hasClass('room-occupancy-children'));
+                massert.cssClass(element, 'room-occupancy-children');
             });
         });
 
@@ -73,7 +71,7 @@ describe('ChildrenInput', function () {
             });
 
             it('displays the correct amount of age inputs', function () {
-                assert.strictEqual(bro.$('input[type=number]', element).size(), 3);
+                assert.strictEqual(element.querySelectorAll('input[type=number]').length, 3);
             });
 
             [0, 2, 12].forEach(function (age, index) {
@@ -241,7 +239,7 @@ describe('ChildrenInput', function () {
             });
 
             it('has correct translate for 2 children', function () {
-                assert(bro.$(element).text().match('Возраст детей'));
+                massert.contains(element.textContent, 'Возраст детей');
             });
         });
 

@@ -3,7 +3,7 @@ describe('OccupancyInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        bro = require('jsdom-test-browser'),
+        massert = require('./helpers/massert'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
         OccupancyInput = require('../src/OccupancyInput'),
@@ -25,8 +25,6 @@ describe('OccupancyInput', function () {
         var component,
             element;
 
-        before(function (done) { bro.jQueryify(done); });
-
         beforeEach(function () {
             component = TestUtils.renderIntoDocument(
                 React.createElement(OccupancyInput, {
@@ -44,7 +42,7 @@ describe('OccupancyInput', function () {
         });
 
         it('has the top level class assigned', function () {
-            assert(bro.$(element).hasClass('room-occupancy'));
+            massert.cssClass(element, 'room-occupancy');
         });
 
         it('aggregates an AdultsCountInput', function () {

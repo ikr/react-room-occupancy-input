@@ -3,7 +3,6 @@ describe('AdultsCountInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
         AdultsCountInput = require('../src/AdultsCountInput');
@@ -22,8 +21,6 @@ describe('AdultsCountInput', function () {
         describe('element HTML', function () {
             var element;
 
-            before(function (done) { bro.jQueryify(done); });
-
             beforeEach(function () {
                 element = TestUtils.renderIntoDocument(
                     React.createElement(AdultsCountInput, {value: 5})
@@ -40,7 +37,7 @@ describe('AdultsCountInput', function () {
             });
 
             it('selects the option defined by the component\'s value property', function () {
-                assert.strictEqual(bro.$(element).val(), '5');
+                assert.strictEqual(element.options.item(element.selectedIndex).value, '5');
             });
         });
 

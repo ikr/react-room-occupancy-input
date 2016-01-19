@@ -3,7 +3,6 @@ describe('ChildAgeInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
         ChildAgeInput = require('../src/ChildAgeInput');
@@ -65,8 +64,6 @@ describe('ChildAgeInput', function () {
                 component,
                 element;
 
-            before(function (done) { bro.jQueryify(done); });
-
             beforeEach(function () {
                 spy = sinon.spy();
 
@@ -78,7 +75,7 @@ describe('ChildAgeInput', function () {
             });
 
             it('happens with an initially empty value', function () {
-                assert.strictEqual(bro.$(element).val(), '');
+                assert.strictEqual(element.value, '');
             });
 
             describe('in case of a valid new value', function () {
@@ -109,7 +106,7 @@ describe('ChildAgeInput', function () {
                 });
 
                 it('gets rendered', function () {
-                    assert.strictEqual(bro.$(element).val(), 'moo');
+                    assert.strictEqual(element.value, 'moo');
                 });
             });
 
