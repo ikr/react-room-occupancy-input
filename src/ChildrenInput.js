@@ -38,7 +38,7 @@
         },
 
         subElements: function () {
-            return [this.countElement()].concat([this.agesElement()]);
+            return [this.countElement()].concat(this.ageElements());
         },
 
         countElement: function () {
@@ -59,14 +59,14 @@
             ]);
         },
 
-        agesElement: function () {
+        ageElements: function () {
             var onChangeFactory = function (index) {
                     return function (newAge) {
                         this.handleAgeChange(index, newAge);
                     }.bind(this);
                 }.bind(this),
 
-                ageElements = this.props.value.map(function (child, index) {
+                ageInputs = this.props.value.map(function (child, index) {
                     var id = 'age' + index;
 
                     return React.createElement(ChildAgeInput, {
@@ -83,15 +83,19 @@
                         FormattedMessage,
                         {
                             message: this.getIntlMessage('react-room-occupancy-input.childrenAge'),
-                            children: ageElements.length
+                            children: ageInputs.length
                         }
                     )
                 );
 
-            return React.DOM.div(
-                {className: 'room-occupancy-children-ages', key: 'k1'},
-                (ageElements.length > 0) ? [labelElement].concat(ageElements) : []
-            );
+            if (ageInputs.length > 0) {
+                return [React.DOM.div(
+                    {className: 'room-occupancy-children-ages', key: 'k1'},
+                    [labelElement].concat(ageInputs)
+                )];
+            }
+
+            return [];
         },
 
         handleCountChange: function (newCount) {

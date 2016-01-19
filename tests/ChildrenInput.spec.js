@@ -282,6 +282,11 @@ describe('ChildrenInput', function () {
                 component.handleCountChange(3);
                 assert.deepEqual(component.state.drafting, [true, false, false]);
             });
+
+            it.skip('triggers a child age warning when an element is true-ed', function () {
+                component.handleAgeChange(0, null);
+                assert(component.getDOMNode().querySelector('.alert-warning'));
+            });
         });
     });
 });
