@@ -25,7 +25,7 @@ describe('ChildAgeInput', function () {
 
             beforeEach(function () {
                 component = TestUtils.renderIntoDocument(
-                    React.createElement(ChildAgeInput, {value: 7})
+                    React.createElement(ChildAgeInput, {value: 7, onChange: function () {}})
                 );
 
                 element = component.getDOMNode();

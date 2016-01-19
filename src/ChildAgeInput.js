@@ -13,7 +13,7 @@
 
         propTypes: {
             value: React.PropTypes.number,
-            onChange: React.PropTypes.func
+            onChange: React.PropTypes.func.isRequired
         },
 
         getInitialState: function () {
