@@ -7,10 +7,7 @@
         ReactIntl = require('react-intl'),
         FormattedMessage = ReactIntl.FormattedMessage,
         IntlMixin = ReactIntl.IntlMixin,
-
-        clone = function (x) {
-            return JSON.parse(JSON.stringify(x));
-        };
+        clone = require('./clone');
 
     module.exports = React.createClass({
         displayName: 'OccupancyInput',
