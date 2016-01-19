@@ -243,5 +243,45 @@ describe('ChildrenInput', function () {
                 assert(bro.$(element).text().match('Возраст детей'));
             });
         });
+
+        describe('drafting state', function () {
+            var component;
+
+            beforeEach(function () {
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {
+                        value: [{age: 2}, {age: 4}],
+                        onChange: function () {},
+                        messages: intlMessages().en
+                    })
+                );
+            });
+
+            it('is initially a false vector', function () {
+                assert.deepEqual(component.state.drafting, [false, false]);
+            });
+
+            it('gets corresponding element updated on onChane(null)', function () {
+                component.handleAgeChange(1, null);
+                assert.deepEqual(component.state.drafting, [false, true]);
+            });
+
+            it('gets corresponding element restored on onChane(smth-valid)', function () {
+                component.handleAgeChange(1, null);
+                component.handleAgeChange(1, 5);
+                assert.deepEqual(component.state.drafting, [false, false]);
+            });
+
+            it('is shortened on count reduction', function () {
+                component.handleCountChange(1);
+                assert.deepEqual(component.state.drafting, [false]);
+            });
+
+            it('is padded on count increase', function () {
+                component.handleAgeChange(0, null);
+                component.handleCountChange(3);
+                assert.deepEqual(component.state.drafting, [true, false, false]);
+            });
+        });
     });
 });
