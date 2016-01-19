@@ -17,6 +17,10 @@ describe('OccupancyInput', function () {
         });
     });
 
+    it('defines the display name', function () {
+        assert.strictEqual(typeof OccupancyInput.displayName, 'string');
+    });
+
     describe('instance structure', function () {
         var component,
             element;

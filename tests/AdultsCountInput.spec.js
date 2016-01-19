@@ -14,6 +14,10 @@ describe('AdultsCountInput', function () {
         });
     });
 
+    it('defines the display name', function () {
+        assert.strictEqual(typeof AdultsCountInput.displayName, 'string');
+    });
+
     describe('instance', function () {
         describe('element HTML', function () {
             var element;

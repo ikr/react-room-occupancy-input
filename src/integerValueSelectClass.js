@@ -5,6 +5,8 @@
 
     module.exports = function (options) {
         return React.createClass({
+            displayName: 'IntegerValueSelect',
+
             propTypes: {
                 value: React.PropTypes.number,
                 onChange: React.PropTypes.func

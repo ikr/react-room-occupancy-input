@@ -9,6 +9,8 @@
         };
 
     module.exports = React.createClass({
+        displayName: 'ChildAgeInput',
+
         propTypes: {
             value: React.PropTypes.number,
             onChange: React.PropTypes.func

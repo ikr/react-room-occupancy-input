@@ -13,7 +13,9 @@
         };
 
     module.exports = React.createClass({
+        displayName: 'ChildrenInput',
         mixins: [IntlMixin],
+
         propTypes: {
             value: React.PropTypes.array,
             onChange: React.PropTypes.func

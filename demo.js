@@ -7,6 +7,7 @@
         intlMessages = require('./src/intlMessages'),
 
         Container = React.createClass({
+            displayName: 'Container',
             mixins: [IntlMixin],
 
             getInitialState: function () {

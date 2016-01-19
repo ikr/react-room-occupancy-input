@@ -13,7 +13,9 @@
         };
 
     module.exports = React.createClass({
+        displayName: 'OccupancyInput',
         mixins: [IntlMixin],
+
         propTypes: {
             value: React.PropTypes.object.isRequired,
             onChange: React.PropTypes.func.isRequired

@@ -14,6 +14,10 @@ describe('ChildAgeInput', function () {
         });
     });
 
+    it('defines the display name', function () {
+        assert.strictEqual(typeof ChildAgeInput.displayName, 'string');
+    });
+
     describe('instance', function () {
         describe('element', function () {
             var component,

@@ -17,6 +17,10 @@ describe('ChildrenInput', function () {
         });
     });
 
+    it('defines the display name', function () {
+        assert.strictEqual(typeof ChildrenInput.displayName, 'string');
+    });
+
     describe('instance', function () {
         before(function (done) { bro.jQueryify(done); });
 
