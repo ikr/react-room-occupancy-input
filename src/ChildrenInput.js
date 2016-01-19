@@ -84,7 +84,7 @@
                 this.props.onChange(this.props.value.slice(0, newCount));
             }
             else {
-                this.props.onChange(this.prepareDraft(newCount));
+                this.props.onChange(this.padValue(newCount));
             }
         },
 
@@ -94,7 +94,7 @@
             this.props.onChange(newChildrenValue);
         },
 
-        prepareDraft: function (newCount) {
+        padValue: function (newCount) {
             var draft = this.props.value.slice(),
                 i;
 
