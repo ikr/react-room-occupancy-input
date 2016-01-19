@@ -10,9 +10,17 @@ describe('intlMessages', function () {
 
     describe('react-room-occupancy-input namespace', function () {
         ['en', 'de'].forEach(function (locale) {
-            ['adults', 'children', 'childrenAge'].forEach(function (messageName) {
+            [
+                'adults',
+                'children',
+                'childrenAge',
+                'childAgeWarning'
+            ].forEach(function (messageName) {
                 it('defines ' + messageName + ' for ' + locale + ' locale', function () {
-                    assert(intlMessages()[locale]['react-room-occupancy-input'][messageName]);
+                    assert.strictEqual(
+                        typeof intlMessages()[locale]['react-room-occupancy-input'][messageName],
+                        'string'
+                    );
                 });
             });
         });
