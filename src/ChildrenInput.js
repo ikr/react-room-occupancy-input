@@ -133,17 +133,15 @@
         newDraftingState: function (drafting) {
             this.setState({drafting: drafting});
 
-            if (this.isDrafting()) {
+            if (
+                drafting.reduce(function (memo, x) {
+                    return memo || x;
+                }, false)
+            ) {
                 this.props.onInvalidAge();
             } else {
                 this.props.onAgesBecomingValid();
             }
-        },
-
-        isDrafting: function () {
-            return this.state.drafting.reduce(function (memo, x) {
-                return memo || x;
-            }, false);
         }
     });
 }());
