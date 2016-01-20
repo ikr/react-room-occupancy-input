@@ -139,14 +139,14 @@
             return pad(this.state.drafting, newCount, false);
         },
 
+        newDraftingState: function (drafting) {
+            this.setState({drafting: drafting});
+        },
+
         isDrafting: function () {
             return this.state.drafting.reduce(function (memo, x) {
                 return memo || x;
             }, false);
-        },
-
-        newDraftingState: function (drafting) {
-            this.setState({drafting: drafting});
         }
     });
 }());
