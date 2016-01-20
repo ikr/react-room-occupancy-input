@@ -127,5 +127,28 @@ describe('OccupancyInput', function () {
                 assert.deepEqual(spy.args[0][0], {adults: 2, children: []});
             });
         });
+
+        describe('child age alert', function () {
+            var element;
+
+            beforeEach(function () {
+                element = component.getDOMNode();
+            });
+
+            it('gets displayed after an ChildrenInput/onInvalidAge', function () {
+                component.refs.children.props.onInvalidAge();
+                massert.contains(element.querySelector('.alert-warning').textContent, '0 to 12');
+            });
+
+            it('isn\'t initially displayed', function () {
+                assert(!element.querySelector('.alert-warning'));
+            });
+
+            it('gets hidden after an ChildrenInput/onAgesBecomingValid', function () {
+                component.refs.children.props.onInvalidAge();
+                component.refs.children.props.onAgesBecomingValid();
+                assert(!element.querySelector('.alert-warning'));
+            });
+        });
     });
 });

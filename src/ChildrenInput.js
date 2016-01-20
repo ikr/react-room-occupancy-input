@@ -40,7 +40,7 @@
         },
 
         subElements: function () {
-            return [this.countElement()].concat(this.ageElements(), this.childAgeWarningElements());
+            return [this.countElement()].concat(this.ageElements());
         },
 
         countElement: function () {
@@ -94,17 +94,6 @@
                 return [React.DOM.div(
                     {className: 'room-occupancy-children-ages', key: 'k1'},
                     [labelElement].concat(ageInputs)
-                )];
-            }
-
-            return [];
-        },
-
-        childAgeWarningElements: function () {
-            if (this.isDrafting()) {
-                return [React.DOM.div(
-                    {className: 'alert alert-warning', role: 'alert', key: 'warning'},
-                    this.getIntlMessage('react-room-occupancy-input.childAgeWarning')
                 )];
             }
 

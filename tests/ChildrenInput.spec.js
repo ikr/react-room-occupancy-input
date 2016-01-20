@@ -249,8 +249,7 @@ describe('ChildrenInput', function () {
                             'react-room-occupancy-input': {
                                 children: 'Детей',
                                 childrenAge: '{children, plural, =1 {Возраст ребёнка} other {Возраст детей}}',
-                                adults: 'Взрослых',
-                                childAgeWarning: 'Только 0-12'
+                                adults: 'Взрослых'
                             }
                         }
                     })
@@ -301,15 +300,6 @@ describe('ChildrenInput', function () {
                 component.handleAgeChange(0, null);
                 component.handleCountChange(3);
                 assert.deepEqual(component.state.drafting, [true, false, false]);
-            });
-
-            it('triggers a child age warning when an element is true-ed', function () {
-                component.handleAgeChange(0, null);
-                assert(component.getDOMNode().querySelector('.alert-warning'));
-            });
-
-            it('initially causes no age warning', function () {
-                assert(!component.getDOMNode().querySelector('.alert-warning'));
             });
 
             it('considers 0 a valid age', function () {

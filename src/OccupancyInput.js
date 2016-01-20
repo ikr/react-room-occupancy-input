@@ -18,6 +18,10 @@
             onChange: React.PropTypes.func.isRequired
         },
 
+        getInitialState: function () {
+            return {invalidAge: false};
+        },
+
         render: function () {
             return React.DOM.div({className: 'room-occupancy'}, [
                 React.DOM.div({className: 'room-occupancy-adults-count', key: 'k0'}, [
@@ -40,11 +44,29 @@
                     ref: 'children',
                     value: this.props.value.children,
                     onChange: this.handleChildrenChange,
-                    onInvalidAge: function () {},
-                    onAgesBecomingValid: function () {},
+
+                    onInvalidAge: function () {
+                        this.setState({invalidAge: true});
+                    }.bind(this),
+
+                    onAgesBecomingValid: function () {
+                        this.setState({invalidAge: false});
+                    }.bind(this),
+
                     key: 'k1'
                 })
-            ]);
+            ].concat(this.childAgeWarningElements()));
+        },
+
+        childAgeWarningElements: function () {
+            if (this.state.invalidAge) {
+                return [React.DOM.div(
+                    {className: 'alert alert-warning', role: 'alert', key: 'k2'},
+                    this.getIntlMessage('react-room-occupancy-input.childAgeWarning')
+                )];
+            }
+
+            return [];
         },
 
         handleAdultsChange: function (newAdultsCount) {
