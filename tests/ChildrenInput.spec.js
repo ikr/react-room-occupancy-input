@@ -11,7 +11,12 @@ describe('ChildrenInput', function () {
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils;
 
-    ['value', 'onChange'].forEach(function (name) {
+    [
+        'value',
+        'onChange',
+        'onInvalidAge',
+        'onAgesBecomingValid'
+    ].forEach(function (name) {
         it('declares the ' + name + ' property', function () {
             assert(ChildrenInput.propTypes[name]);
         });
@@ -30,6 +35,8 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {
                         value: [],
                         onChange: function () {},
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: intlMessages().en
                     })
                 ).getDOMNode();
@@ -53,6 +60,8 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {
                         value: [{age: 0}, {age: 2}, {age: 12}],
                         onChange: function () {},
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: intlMessages().en
                     })
                 );
@@ -98,6 +107,8 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {
                         value: [{age: 3}, {age: 9}],
                         onChange: function () {},
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: intlMessages().en
                     })
                 );
@@ -130,6 +141,8 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {
                         value: [{age: 4}, {age: 2}],
                         onChange: spy,
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: intlMessages().en
                     })
                 );
@@ -175,6 +188,8 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {
                         value: [{age: 6}, {age: 11}],
                         onChange: spy,
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: intlMessages().en
                     })
                 );
@@ -202,6 +217,8 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {
                         value: [{age: null}, {age: null}],
                         onChange: spy,
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: intlMessages().en
                     })
                 );
@@ -225,7 +242,9 @@ describe('ChildrenInput', function () {
                 element = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenInput, {
                         value: [{age: null}, {age: null}],
-                        onChange: sinon.spy(),
+                        onChange: function () {},
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: {
                             'react-room-occupancy-input': {
                                 children: 'Детей',
@@ -251,6 +270,8 @@ describe('ChildrenInput', function () {
                     React.createElement(ChildrenInput, {
                         value: [{age: 2}, {age: 4}],
                         onChange: function () {},
+                        onInvalidAge: function () {},
+                        onAgesBecomingValid: function () {},
                         messages: intlMessages().en
                     })
                 );

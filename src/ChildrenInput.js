@@ -25,8 +25,10 @@
         mixins: [IntlMixin],
 
         propTypes: {
-            value: React.PropTypes.array,
-            onChange: React.PropTypes.func
+            value: React.PropTypes.array.isRequired,
+            onChange: React.PropTypes.func.isRequired,
+            onInvalidAge: React.PropTypes.func.isRequired,
+            onAgesBecomingValid: React.PropTypes.func.isRequired
         },
 
         getInitialState: function () {

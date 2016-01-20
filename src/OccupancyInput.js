@@ -40,6 +40,8 @@
                     ref: 'children',
                     value: this.props.value.children,
                     onChange: this.handleChildrenChange,
+                    onInvalidAge: function () {},
+                    onAgesBecomingValid: function () {},
                     key: 'k1'
                 })
             ]);
