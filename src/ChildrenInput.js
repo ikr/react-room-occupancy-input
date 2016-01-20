@@ -112,11 +112,11 @@
         handleCountChange: function (newCount) {
             if (newCount <= this.props.value.length) {
                 this.props.onChange(this.props.value.slice(0, newCount));
-                this.setState({drafting: this.state.drafting.slice(0, newCount)});
+                this.newDraftingState(this.state.drafting.slice(0, newCount));
             }
             else {
                 this.props.onChange(this.padValue(newCount));
-                this.setState({drafting: this.padDrafting(newCount)});
+                this.newDraftingState(this.padDrafting(newCount));
             }
         },
 
@@ -128,7 +128,7 @@
             this.props.onChange(newChildrenValue);
 
             newDrafting[index] = (newAge === null);
-            this.setState({drafting: newDrafting});
+            this.newDraftingState(newDrafting);
         },
 
         padValue: function (newCount) {
@@ -143,6 +143,10 @@
             return this.state.drafting.reduce(function (memo, x) {
                 return memo || x;
             }, false);
+        },
+
+        newDraftingState: function (drafting) {
+            this.setState({drafting: drafting});
         }
     });
 }());
