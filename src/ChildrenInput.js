@@ -99,11 +99,7 @@
         },
 
         childAgeWarningElements: function () {
-            var drafting = this.state.drafting.reduce(function (memo, x) {
-                    return memo || x;
-                }, false);
-
-            if (drafting) {
+            if (this.isDrafting()) {
                 return [React.DOM.div(
                     {className: 'alert alert-warning', role: 'alert', key: 'warning'},
                     this.getIntlMessage('react-room-occupancy-input.childAgeWarning')
@@ -141,6 +137,12 @@
 
         padDrafting: function (newCount) {
             return pad(this.state.drafting, newCount, false);
+        },
+
+        isDrafting: function () {
+            return this.state.drafting.reduce(function (memo, x) {
+                return memo || x;
+            }, false);
         }
     });
 }());
