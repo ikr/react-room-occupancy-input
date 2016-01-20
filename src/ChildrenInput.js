@@ -143,6 +143,12 @@
 
         newDraftingState: function (drafting) {
             this.setState({drafting: drafting});
+
+            if (this.isDrafting()) {
+                this.props.onInvalidAge();
+            } else {
+                this.props.onAgesBecomingValid();
+            }
         },
 
         isDrafting: function () {

@@ -262,7 +262,7 @@ describe('ChildrenInput', function () {
             });
         });
 
-        describe('drafting state', function () {
+        describe('drafting state data', function () {
             var component;
 
             beforeEach(function () {
@@ -315,6 +315,47 @@ describe('ChildrenInput', function () {
             it('considers 0 a valid age', function () {
                 component.handleAgeChange(0, 0);
                 assert.deepEqual(component.state.drafting, [false, false]);
+            });
+        });
+
+        describe('newDraftingState', function () {
+            var component,
+                onInvalidAge,
+                onAgesBecomingValid;
+
+            beforeEach(function () {
+                onInvalidAge = sinon.spy();
+                onAgesBecomingValid = sinon.spy();
+
+                component = TestUtils.renderIntoDocument(
+                    React.createElement(ChildrenInput, {
+                        value: [{age: null}, {age: null}],
+                        onChange: function () {},
+                        onInvalidAge: onInvalidAge,
+                        onAgesBecomingValid: onAgesBecomingValid,
+                        messages: intlMessages().en
+                    })
+                );
+            });
+
+            it('triggers onInvalidAge on a true in drafting vector', function () {
+                component.newDraftingState([false, true]);
+                assert(onInvalidAge.calledOnce);
+            });
+
+            it('triggers onAgesBecomingValid on all-false drafting vector', function () {
+                component.newDraftingState([false, false]);
+                assert(onAgesBecomingValid.calledOnce);
+            });
+
+            it('triggers no onAgesBecomingValid on a true in drafting vector', function () {
+                component.newDraftingState([false, true]);
+                assert(!onAgesBecomingValid.called);
+            });
+
+            it('triggers no onInvalidAge on all-false drafting vector', function () {
+                component.newDraftingState([false, false]);
+                assert(!onInvalidAge.calledOnce);
             });
         });
     });
