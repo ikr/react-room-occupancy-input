@@ -41,7 +41,6 @@
   },
   "homepage": "https://github.com/ikr/react-room-occupancy-input",
   "devDependencies": {
-    "react": "^0.13.3",
     "browserify": "^9.0.8",
     "intl": "^0.1.4",
     "jsdom": "^5.0.1",
@@ -52,10 +51,8 @@
     "uglify-js": "^2.4.20",
     "watchify": "^3.1.2"
   },
-  "peerDependencies": {
-    "react": "^0.13.3"
-  },
   "dependencies": {
+    "react": "^0.13.3",
     "react-intl": "^1.2.2"
   }
 }
