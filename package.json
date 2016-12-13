@@ -3,6 +3,7 @@
   "version": "2.2.2",
   "description": "React.js component for specifying a hotel room occupancy: how many adults, how many kids, how old kids are",
   "main": "index.js",
+  "browser": "browser.js",
   "scripts": {
     "pretest": "jshint tests src index.js demo.js",
     "test": "mocha --require ./test-hook -b tests/*.spec.js",
@@ -41,6 +42,7 @@
   },
   "homepage": "https://github.com/ikr/react-room-occupancy-input",
   "devDependencies": {
+    "react": "^0.13.3",
     "browserify": "^9.0.8",
     "intl": "^0.1.4",
     "jsdom": "^5.0.1",
@@ -52,7 +54,6 @@
     "watchify": "^3.1.2"
   },
   "dependencies": {
-    "react": "^0.13.3",
     "react-intl": "^1.2.2"
   }
 }

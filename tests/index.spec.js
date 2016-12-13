@@ -1,4 +1,4 @@
-describe('Public API', function () {
+describe('Full public API', function () {
     'use strict';
 
     var assert = require('assert'),
@@ -8,11 +8,11 @@ describe('Public API', function () {
 
     assert(bro);
 
-    it('is simply the OccupancyInput class', function () {
-        assert.strictEqual(api, OccupancyInput);
+    it('exports the OccupancyInput class', function () {
+        assert.strictEqual(api.Klass, OccupancyInput);
     });
 
-    it('exports default intl messages', function () {
-        assert(typeof api.intlMessages === 'function');
+    it('exports the i18n messages', function () {
+        assert.strictEqual(typeof api.intlMessages, 'function');
     });
 });
