@@ -42,8 +42,8 @@ describe('ChildAgeInput', function () {
                 assert.strictEqual(element.getAttribute('min'), '0');
             });
 
-            it('declares 12 as the maximum', function () {
-                assert.strictEqual(element.getAttribute('max'), '12');
+            it('declares 11 as the maximum', function () {
+                assert.strictEqual(element.getAttribute('max'), '11');
             });
 
             it('declares 1 as the step', function () {

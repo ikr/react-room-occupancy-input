@@ -137,7 +137,7 @@ describe('OccupancyInput', function () {
 
             it('gets displayed after an ChildrenInput/onInvalidAge', function () {
                 component.refs.children.props.onInvalidAge();
-                massert.contains(element.querySelector('.alert-warning').textContent, '0 to 12');
+                massert.contains(element.querySelector('.alert-warning').textContent, '0 to 11');
             });
 
             it('isn\'t initially displayed', function () {

@@ -24,7 +24,7 @@
             return React.DOM.input({
                 type: 'number',
                 min: 0,
-                max: 12,
+                max: 11,
                 step: 1,
                 value: this.inputValueToRender(),
                 onChange: this.handleInputChange

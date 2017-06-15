@@ -15,6 +15,6 @@
 
     module.exports = function (x) {
         var floatX = parseFloat(x);
-        return Number.isInteger(floatX) && (floatX >= 0) && (floatX <= 12);
+        return Number.isInteger(floatX) && (floatX >= 0) && (floatX <= 11);
     };
 }());
