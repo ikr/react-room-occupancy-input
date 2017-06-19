@@ -14,7 +14,11 @@
 
             render: function () {
                 return React.DOM.select(
-                    {value: this.props.value, onChange: this.handleSelectionChange},
+                    {
+                        value: this.props.value,
+                        onChange: this.handleSelectionChange,
+                        className: 'form-control'
+                    },
 
                     options.map(function (v) {
                         return React.DOM.option({value: v, key: 'k' + v}, v);

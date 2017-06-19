@@ -5,7 +5,8 @@ describe('ChildrenCountInput', function () {
         bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
-        ChildrenCountInput = require('../src/ChildrenCountInput');
+        ChildrenCountInput = require('../src/ChildrenCountInput'),
+        massert = require('./helpers/massert.js');
 
     assert(bro);
 
@@ -19,6 +20,10 @@ describe('ChildrenCountInput', function () {
                 element = TestUtils.renderIntoDocument(
                     React.createElement(ChildrenCountInput)
                 ).getDOMNode();
+            });
+
+            it('has the form-control CSS class', function () {
+                massert.cssClass(element, 'form-control');
             });
 
             it('defines 6 option values', function () {

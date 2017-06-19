@@ -27,7 +27,8 @@
                 max: 11,
                 step: 1,
                 value: this.inputValueToRender(),
-                onChange: this.handleInputChange
+                onChange: this.handleInputChange,
+                className: 'form-control'
             });
         },
 

@@ -5,7 +5,8 @@ describe('ChildAgeInput', function () {
         sinon = require('sinon'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
-        ChildAgeInput = require('../src/ChildAgeInput');
+        ChildAgeInput = require('../src/ChildAgeInput'),
+        massert = require('./helpers/massert.js');
 
     ['value', 'onChange'].forEach(function (name) {
         it('declares the ' + name + ' property', function () {
@@ -52,6 +53,10 @@ describe('ChildAgeInput', function () {
 
             it('passes through its value property value to the input', function () {
                 assert.strictEqual(element.getAttribute('value'), '7');
+            });
+
+            it('has the form-control CSS class', function () {
+                massert.cssClass(element, 'form-control');
             });
 
             it('has null draft in the state', function () {
