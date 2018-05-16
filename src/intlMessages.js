@@ -19,6 +19,15 @@
                     adults: 'Erwachsene',
                     childAgeWarning: 'Alter der Kinder sollte zwischen 0 und 11 Jahren liegen'
                 }
+            },
+            
+            zh: {
+                'react-room-occupancy-input': {
+                    'children': '儿童',
+                    'childrenAge': '儿童年龄',
+                    'adults': '成人',
+                    'childAgeWarning': '儿童（0-12岁，不包括12岁）'
+                }
             }
         };
     };
