@@ -1,6 +1,6 @@
 {
   "name": "react-room-occupancy-input",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "React.js component for specifying a hotel room occupancy: how many adults, how many kids, how old kids are",
   "main": "index.js",
   "browser": "browser.js",
